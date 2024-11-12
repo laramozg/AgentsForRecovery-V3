@@ -1,6 +1,5 @@
 package org.example.sportsuser.configurations.security;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -24,7 +23,7 @@ public class AuthenticationFilter implements WebFilter {
             bearerToken = bearerToken.substring(BEARER_PREFIX_LENGTH);
         } else if (bearerToken != null) {
             return Mono.error(new RuntimeException("Invalid bearer token"));
-                    //InternalException(HttpStatus.UNAUTHORIZED, ErrorCode.TOKEN_DOES_NOT_EXIST));
+
         }
 
         if (bearerToken != null) {
@@ -35,7 +34,7 @@ public class AuthenticationFilter implements WebFilter {
                         ));
             } else {
                 return Mono.error(new RuntimeException("Invalid bearer token"));
-                        //InternalException(HttpStatus.UNAUTHORIZED, ErrorCode.TOKEN_EXPIRED));
+
             }
         } else {
             return chain.filter(exchange);

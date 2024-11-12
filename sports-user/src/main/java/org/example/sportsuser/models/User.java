@@ -18,14 +18,19 @@ public class User {
     @Id
     private String username;
     @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
     private String nick;
     @Column(nullable = false)
     private String telegram;
-
+    @Column(nullable = false)
+    private boolean confirmed = false;
+    @Column(name = "confirmed_username", nullable = false)
+    private boolean confirmedUsername = false;
+    @Column(nullable = false)
+    private boolean blocked = false;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private AuthData authorizationData;
 }

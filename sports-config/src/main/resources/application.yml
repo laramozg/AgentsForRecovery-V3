@@ -7,7 +7,7 @@ info:
 
 spring:
   application:
-    name: afa-config
+    name: sports-config
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:native}
   cloud:

@@ -27,7 +27,7 @@ public class SwaggerConfig {
                         )
                 )
                 .info(
-                        new Info().title("AfaUser API").version("1.0")
+                        new Info().title("SportsUser API").version("1.0")
                 );
     }
 }

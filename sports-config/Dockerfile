@@ -8,7 +8,7 @@ COPY settings.gradle ./settings.gradle
 
 RUN gradle clean build -x test
 
-FROM amazoncorretto:21-alpine
+FROM amazoncorretto:17-alpine
 
 WORKDIR /app
 

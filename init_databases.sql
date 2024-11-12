@@ -1,1 +1,1 @@
-create database afa_user;
+create database sports_user;

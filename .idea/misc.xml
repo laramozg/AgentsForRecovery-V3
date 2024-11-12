@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/sports-admin" />
+    <file type="web" url="file://$PROJECT_DIR$/sports-config" />
+    <file type="web" url="file://$PROJECT_DIR$/sports-discovery" />
+    <file type="web" url="file://$PROJECT_DIR$/sports-gateway" />
+    <file type="web" url="file://$PROJECT_DIR$/sports-order" />
+    <file type="web" url="file://$PROJECT_DIR$/sports-user" />
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

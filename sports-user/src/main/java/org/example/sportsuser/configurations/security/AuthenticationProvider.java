@@ -14,7 +14,6 @@ import javax.crypto.SecretKey;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Component
 public class AuthenticationProvider {
@@ -36,53 +35,44 @@ public class AuthenticationProvider {
         return claims.getExpiration().after(new Date());
     }
 
-    public String createAccessToken(UUID userId, String username, Set<Role> roles) {
+    public String createAccessToken(String username, Role role) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", userId.toString());
-        claims.put("roles", roles);
+        claims.put("username", username);
+        claims.put("role", role.toString());
 
         Instant validity = Instant.now().plus(props.getAccess(), ChronoUnit.HOURS);
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(username)
                 .setExpiration(Date.from(validity))
                 .signWith(key)
                 .compact();
     }
 
-    public String createRefreshToken(UUID userId, String username) {
+    public String createRefreshToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", userId.toString());
+        claims.put("username", username);
 
         Instant validity = Instant.now().plus(props.getRefresh(), ChronoUnit.HOURS);
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(username)
                 .setExpiration(Date.from(validity))
                 .signWith(key)
                 .compact();
     }
 
     public UsernamePasswordAuthenticationToken getAuthentication(String token) {
-        String id = getIdFromToken(token);
         String username = getUsernameFromToken(token);
-        List<GrantedAuthority> authorities = getRolesFromToken(token);
-        return new UsernamePasswordAuthenticationToken(id, username, authorities);
+        List<GrantedAuthority> authority = getRoleFromToken(token);
+        return new UsernamePasswordAuthenticationToken(username, token, authority);
     }
 
-    public String getIdFromToken(String token) {
-        return parseClaims(token).get("id", String.class);
+    public String getUsernameFromToken(String token) {
+        return parseClaims(token).get("username", String.class);
     }
 
-    private String getUsernameFromToken(String token) {
-        return parseClaims(token).getSubject();
-    }
-
-    private List<GrantedAuthority> getRolesFromToken(String token) {
-        List<?> roles = parseClaims(token).get("roles", List.class);
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.toString()))
-                .collect(Collectors.toList());
+    private List<GrantedAuthority> getRoleFromToken(String token) {
+        String role = parseClaims(token).get("role", String.class);
+        return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 
     private Claims parseClaims(String token) {
