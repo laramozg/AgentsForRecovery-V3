@@ -2,10 +2,7 @@ package org.example.sportsuser.controllers.auth;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.sportsuser.controllers.auth.dto.AuthorizeUserRequest;
-import org.example.sportsuser.controllers.auth.dto.AuthorizeUserResponse;
-import org.example.sportsuser.controllers.auth.dto.RegisterUserRequest;
-import org.example.sportsuser.controllers.auth.dto.RegisterUserResponse;
+import org.example.sportsuser.controllers.auth.dto.*;
 import org.example.sportsuser.mappers.AuthMapper;
 import org.example.sportsuser.services.AuthService;
 import org.springframework.http.HttpStatus;
@@ -21,7 +18,6 @@ public class AuthController {
     private final AuthMapper authMapper;
     private final AuthService authService;
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
@@ -31,6 +27,12 @@ public class AuthController {
                 .map(RegisterUserResponse::new);
     }
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("isAuthenticated()")
+    public Mono<AuthorizationDetails> getAuthDetails() {
+        return authService.getAuthDetails();
+    }
 
     @PostMapping("/tokens")
     @ResponseStatus(HttpStatus.CREATED)

@@ -61,6 +61,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         public static final String USER_ROLE = "UserRole";
         public static final String AUTHORIZATION = "Authorization";
 
-        public Config() {  }
+        public Config() {}
     }
 }

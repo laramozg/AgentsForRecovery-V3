@@ -35,10 +35,10 @@ public class AuthenticationProvider {
         return claims.getExpiration().after(new Date());
     }
 
+
     public String createAccessToken(String username, Role role) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", username);
-        claims.put("role", role.toString());
+        Claims claims = Jwts.claims().setSubject(username);
+        claims.put("role", role.name());
 
         Instant validity = Instant.now().plus(props.getAccess(), ChronoUnit.HOURS);
         return Jwts.builder()
@@ -49,8 +49,7 @@ public class AuthenticationProvider {
     }
 
     public String createRefreshToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", username);
+        Claims claims = Jwts.claims().setSubject(username);
 
         Instant validity = Instant.now().plus(props.getRefresh(), ChronoUnit.HOURS);
         return Jwts.builder()
@@ -62,17 +61,17 @@ public class AuthenticationProvider {
 
     public UsernamePasswordAuthenticationToken getAuthentication(String token) {
         String username = getUsernameFromToken(token);
-        List<GrantedAuthority> authority = getRoleFromToken(token);
-        return new UsernamePasswordAuthenticationToken(username, token, authority);
+        GrantedAuthority authority = getRoleFromToken(token);
+        return new UsernamePasswordAuthenticationToken(username, token, Collections.singletonList(authority));
     }
 
     public String getUsernameFromToken(String token) {
-        return parseClaims(token).get("username", String.class);
+        return parseClaims(token).getSubject();
     }
 
-    private List<GrantedAuthority> getRoleFromToken(String token) {
+    private GrantedAuthority getRoleFromToken(String token) {
         String role = parseClaims(token).get("role", String.class);
-        return Collections.singletonList(new SimpleGrantedAuthority(role));
+        return new SimpleGrantedAuthority(role);
     }
 
     private Claims parseClaims(String token) {

@@ -1,8 +1,11 @@
 package org.example.sportsuser.services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.sportsuser.exceptions.ErrorCode;
+import org.example.sportsuser.exceptions.InternalException;
 import org.example.sportsuser.models.User;
 import org.example.sportsuser.repositories.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +23,7 @@ public class UserService {
 
     public Mono<User> find(String username) {
         return userRepository.findByUsername(username)
-                .switchIfEmpty(Mono.error(new InterruptedException("User with username '" + username + "' not found")));
+                .switchIfEmpty(Mono.error(new InternalException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND)));
     }
 
     public Mono<User> create(User user) {
