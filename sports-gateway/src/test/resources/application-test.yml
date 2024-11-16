@@ -2,7 +2,7 @@ spring:
   services:
     urls:
       sports-user: sports-user
-      afaloan: afaloan
+      sports: sports
   cloud:
     config:
       enabled: false

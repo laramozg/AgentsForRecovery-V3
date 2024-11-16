@@ -20,7 +20,7 @@ public class AuthController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
+//    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
     public Mono<RegisterUserResponse> register(@Valid @RequestBody Mono<RegisterUserRequest> request) {
         return request.map(authMapper::convert)
                 .flatMap(authService::register)
@@ -43,7 +43,7 @@ public class AuthController {
 
     @PostMapping("/tokens/refresh")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<AuthorizeUserResponse> reAuthorize(@RequestParam String refresh) throws InterruptedException {
+    public Mono<AuthorizeUserResponse> reAuthorize(@RequestParam String refresh)  {
         return authService.reAuthorize(refresh);
     }
 

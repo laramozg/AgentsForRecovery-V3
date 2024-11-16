@@ -1027,3 +1027,5 @@ w
 G.idea/sonarlint/issuestore/9/9/995dc52a2938a4d5ae1c19128a39b1df96d2ce5a,3\0\3069b90fa52ea9fed51b128fa47f35d0df4ad66c
 
 Q.idea/sonarlint/securityhotspotstore/c/4/c4b30b6de17b5c5580a1d7657c2714e2646e0ca8,5\5\550d2d33a67997f5e256152728b57cf7c439259a
+>
+generated.http,5\5\55a08ba38d73b28d1fc36c781f1256f7624e2a90
