@@ -2,6 +2,7 @@ package org.example.sportsuser.controllers.auth;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.sportsuser.controllers.auth.dto.*;
 import org.example.sportsuser.mappers.AuthMapper;
 import org.example.sportsuser.services.AuthService;
@@ -10,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/auth")
@@ -22,6 +24,7 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
 //    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
     public Mono<RegisterUserResponse> register(@Valid @RequestBody Mono<RegisterUserRequest> request) {
+        log.info("Received registration request");
         return request.map(authMapper::convert)
                 .flatMap(authService::register)
                 .map(RegisterUserResponse::new);
@@ -37,6 +40,7 @@ public class AuthController {
     @PostMapping("/tokens")
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<AuthorizeUserResponse> authorize(@Valid @RequestBody Mono<AuthorizeUserRequest> request) {
+        log.info("Received auth request");
         return request.map(authMapper::convert)
                 .flatMap(authService::authorize);
     }

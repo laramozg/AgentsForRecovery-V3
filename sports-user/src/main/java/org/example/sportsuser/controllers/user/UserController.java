@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
@@ -17,10 +19,10 @@ public class UserController {
     private final UserMapper userMapper;
     private final UserService userService;
 
-    @GetMapping("/{username}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Mono<UserDto> find(@PathVariable String username) {
-        return userService.find(username).map(userMapper::convert);
+    public Mono<UserDto> find(@PathVariable UUID id) {
+        return userService.find(id).map(userMapper::convert);
     }
 
     @GetMapping
@@ -29,32 +31,32 @@ public class UserController {
         return userService.isExists(username);
     }
 
-    @DeleteMapping("/{username}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public Mono<Void> delete(@PathVariable String username) {
-        return userService.delete(username);
+    public Mono<Void> delete(@PathVariable UUID id) {
+        return userService.delete(id);
     }
 
 
-    @PatchMapping("/{username}/block")
+    @PatchMapping("/{id}/block")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
-    public Mono<Void> block(@PathVariable String username) {
-        return userService.block(username).then();
+    public Mono<Void> block(@PathVariable UUID id) {
+        return userService.block(id).then();
     }
 
-    @DeleteMapping("/{username}/block")
+    @DeleteMapping("/{id}/block")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
-    public Mono<Void> unblock(@PathVariable String username) {
-        return userService.unblock(username).then();
+    public Mono<Void> unblock(@PathVariable UUID id) {
+        return userService.unblock(id).then();
     }
 
-    @PatchMapping("/{username}/confirm")
+    @PatchMapping("/{id}/confirm")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
-    public Mono<Void> confirm(@PathVariable String username) {
-        return userService.confirm(username).then();
+    public Mono<Void> confirm(@PathVariable UUID id) {
+        return userService.confirm(id).then();
     }
 
 }

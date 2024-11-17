@@ -1,6 +1,7 @@
 package org.example.sportsuser.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.sportsuser.exceptions.ErrorCode;
 import org.example.sportsuser.exceptions.InternalException;
 import org.example.sportsuser.models.User;
@@ -11,6 +12,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -21,34 +25,44 @@ public class UserService {
         return userRepository.existsByUsername(username);
     }
 
+    public Mono<User> find(UUID id) {
+        return userRepository.findById(id)
+                .switchIfEmpty(Mono.error(new InternalException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND)));
+    }
+
+
     public Mono<User> find(String username) {
         return userRepository.findByUsername(username)
                 .switchIfEmpty(Mono.error(new InternalException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND)));
     }
 
+
     public Mono<User> create(User user) {
-        return userRepository.save(user);
+        return userRepository.save(user)
+                .doOnSuccess(savedUser -> log.info("User created: {}", savedUser))
+                .doOnError(error -> log.error("Error creating user: {}", error.getMessage()));
     }
 
+
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public Mono<User> block(String username) {
-        return find(username).flatMap(user -> {
+    public Mono<User> block(UUID id) {
+        return find(id).flatMap(user -> {
             user.setBlocked(true);
             return userRepository.save(user);
         });
     }
 
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public Mono<User> unblock(String username) {
-        return find(username).flatMap(user -> {
+    public Mono<User> unblock(UUID id) {
+        return find(id).flatMap(user -> {
             user.setBlocked(false);
             return userRepository.save(user);
         });
     }
 
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public Mono<User> confirm(String username) {
-        return find(username).flatMap(user -> {
+    public Mono<User> confirm(UUID id) {
+        return find(id).flatMap(user -> {
             user.setConfirmed(true);
             return userRepository.save(user);
         });
@@ -57,5 +71,10 @@ public class UserService {
     @Transactional(isolation = Isolation.REPEATABLE_READ)
     public Mono<Void> delete(String username) {
         return find(username).flatMap(userRepository::delete);
+    }
+
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    public Mono<Void> delete(UUID id) {
+        return find(id).flatMap(userRepository::delete);
     }
 }

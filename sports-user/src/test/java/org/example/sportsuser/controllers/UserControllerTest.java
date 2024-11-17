@@ -14,7 +14,7 @@ class UserControllerTest extends BaseIntegrationTest {
     @Test
     void findShouldReturnOk() {
         client.get()
-                .uri("/users/" + USER.getUsername())
+                .uri("/users/" + USER.getId())
                 .exchange()
                 .expectAll(
                         result -> result.expectStatus().isOk(),
@@ -27,7 +27,7 @@ class UserControllerTest extends BaseIntegrationTest {
     @Test
     void deleteShouldReturnNoContent() {
         client.delete()
-                .uri("/users/" + USER.getUsername())
+                .uri("/users/" + USER.getId())
                 .exchange()
                 .expectStatus().isNoContent();
     }
@@ -36,7 +36,7 @@ class UserControllerTest extends BaseIntegrationTest {
     @Test
     void blockShouldReturnNoContent() {
         client.patch()
-                .uri("/users/" + USER.getUsername() + "/block")
+                .uri("/users/" + USER.getId() + "/block")
                 .exchange()
                 .expectStatus().isNoContent();
     }
@@ -44,7 +44,7 @@ class UserControllerTest extends BaseIntegrationTest {
     @Test
     void unblockShouldReturnNoContent() {
         client.delete()
-                .uri("/users/" + USER.getUsername() + "/block")
+                .uri("/users/" + USER.getId() + "/block")
                 .exchange()
                 .expectStatus().isNoContent();
     }
@@ -52,7 +52,7 @@ class UserControllerTest extends BaseIntegrationTest {
     @Test
     void confirmShouldReturnNoContent() {
         client.patch()
-                .uri("/users/" + USER.getUsername() + "/confirm")
+                .uri("/users/" + USER.getId() + "/confirm")
                 .exchange()
                 .expectStatus().isNoContent();
     }

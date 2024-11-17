@@ -6,7 +6,7 @@ import org.example.sportsuser.exceptions.ErrorCode;
 import org.example.sportsuser.exceptions.InternalException;
 import org.example.sportsuser.services.AuthService;
 import org.example.sportsuser.services.UserService;
-import org.example.sportsuser.utils.SecurityContext;
+import org.example.sportsuser.utils.SecurityContextUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ class AuthServiceTest {
 
     @BeforeEach
     void setUp() {
-        SecurityContext.mockSecurityContext();
+        SecurityContextUtil.mockSecurityContext();
     }
 
     @AfterEach
@@ -48,7 +48,7 @@ class AuthServiceTest {
         when(userService.create(any())).thenReturn(Mono.just(UNAUTHORIZED_USER));
 
         StepVerifier.create(authService.register(UNAUTHORIZED_USER))
-                .expectNext(UNAUTHORIZED_USER.getUsername())
+                .expectNext(UNAUTHORIZED_USER.getId())
                 .expectComplete()
                 .verify();
     }
@@ -65,12 +65,13 @@ class AuthServiceTest {
     @Test
     void authorizeShouldExecuteSuccessfully() {
         when(userService.find(USER.getUsername())).thenReturn(Mono.just(USER));
-        when(encoder.matches(any(), any())).thenReturn(true);
-        when(authProvider.createAccessToken(any(), any())).thenReturn("access");
-        when(authProvider.createRefreshToken(any())).thenReturn("refresh");
+        when(encoder.matches(any(), any())).thenReturn(false);
+        when(authProvider.createAccessToken(any(), any(), any())).thenReturn("access");
+        when(authProvider.createRefreshToken(any(),  any())).thenReturn("refresh");
 
         StepVerifier.create(authService.authorize(USER))
                 .expectNext(new AuthorizeUserResponse(
+                        USER.getId(),
                         USER.getUsername(),
                         "access",
                         "refresh"
@@ -83,7 +84,7 @@ class AuthServiceTest {
     void authorizeShouldThrowUserPasswordIncorrect() {
         when(userService.find(any(String.class))).thenReturn(Mono.just(USER));
         when(encoder.encode(any())).thenReturn("12345");
-        when(encoder.matches(any(), any())).thenReturn(false);
+        when(encoder.matches(any(), any())).thenReturn(true);
 
         StepVerifier.create(authService.authorize(UNAUTHORIZED_USER))
                 .expectError(InternalException.class)
@@ -95,11 +96,12 @@ class AuthServiceTest {
         when(authProvider.isValid(any())).thenReturn(true);
         when(authProvider.getUsernameFromToken(any())).thenReturn(UNAUTHORIZED_USER.getUsername());
         when(userService.find(UNAUTHORIZED_USER.getUsername())).thenReturn(Mono.just(UNAUTHORIZED_USER));
-        when(authProvider.createAccessToken(any(), any())).thenReturn("access");
-        when(authProvider.createRefreshToken(any())).thenReturn("refresh");
+        when(authProvider.createAccessToken(any(), any(), any())).thenReturn("access");
+        when(authProvider.createRefreshToken(any(), any())).thenReturn("refresh");
 
         StepVerifier.create(authService.reAuthorize("refresh"))
                 .expectNext(new AuthorizeUserResponse(
+                        UNAUTHORIZED_USER.getId(),
                         UNAUTHORIZED_USER.getUsername(),
                         "access",
                         "refresh"

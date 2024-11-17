@@ -2,7 +2,7 @@ package org.example.sportsuser;
 
 import org.example.sportsuser.configurations.PostgresAutoConfiguration;
 import org.example.sportsuser.repositories.UserRepository;
-import org.example.sportsuser.utils.SecurityContext;
+import org.example.sportsuser.utils.SecurityContextUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,7 +30,7 @@ public abstract class BaseIntegrationTest extends PostgresAutoConfiguration {
                 .apply(SecurityMockServerConfigurers.springSecurity())
                 .configureClient()
                 .build()
-                .mutateWith(SecurityMockServerConfigurers.mockAuthentication(SecurityContext.createAuthentication()));
+                .mutateWith(SecurityMockServerConfigurers.mockAuthentication(SecurityContextUtil.createAuthentication()));
     }
 
     private void createUserIfNotExist() {

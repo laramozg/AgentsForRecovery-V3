@@ -8,11 +8,18 @@ databaseChangeLog:
             tableName: users
             columns:
               - column:
-                  name: username
-                  type: varchar(64)
+                  name: id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
                   constraints:
                     nullable: false
                     primaryKey: true
+              - column:
+                  name: username
+                  type: varchar(64)
+                  constraints:
+                    unique: true
+                    nullable: false
               - column:
                   name: password
                   type: varchar(64)

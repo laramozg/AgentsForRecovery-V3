@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sports-gateway.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sports-gateway.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sports-microservices.iml" filepath="$PROJECT_DIR$/.idea/sports-microservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sports-user.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sports-user.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sports-user.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sports-user.test.iml" />
     </modules>
   </component>

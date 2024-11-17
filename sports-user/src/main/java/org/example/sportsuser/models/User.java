@@ -1,36 +1,40 @@
 package org.example.sportsuser.models;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 import org.example.sportsuser.models.enums.Role;
+
+import java.util.UUID;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name = "users")
 public class User {
-
     @Id
+    private UUID id;
+
+    @Column("username")
     private String username;
-    @Column(nullable = false)
+    @Column("password")
     private String password;
-    @Column(nullable = false)
+    @Column("nick")
     private String nick;
-    @Column(nullable = false)
+    @Column("telegram")
     private String telegram;
-    @Column(nullable = false)
+    @Column("confirmed")
     private boolean confirmed = false;
-    @Column(name = "confirmed_username", nullable = false)
+    @Column("confirmed_username")
     private boolean confirmedUsername = false;
-    @Column(nullable = false)
+    @Column("blocked")
     private boolean blocked = false;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+    @Column("role")
+    private Role role = Role.CUSTOMER;
 
 }

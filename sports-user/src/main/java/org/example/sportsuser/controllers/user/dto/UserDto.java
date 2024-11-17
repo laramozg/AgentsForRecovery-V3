@@ -1,7 +1,9 @@
 package org.example.sportsuser.controllers.user.dto;
 
+import java.util.UUID;
 
-public record UserDto(String username,
+public record UserDto(UUID id,
+                      String username,
                       String nick,
                       String telegram,
                       boolean confirmed,

@@ -36,8 +36,9 @@ public class AuthenticationProvider {
     }
 
 
-    public String createAccessToken(String username, Role role) {
+    public String createAccessToken(UUID userId, String username, Role role) {
         Claims claims = Jwts.claims().setSubject(username);
+        claims.put("id", userId);
         claims.put("role", role.name());
 
         Instant validity = Instant.now().plus(props.getAccess(), ChronoUnit.HOURS);
@@ -48,8 +49,9 @@ public class AuthenticationProvider {
                 .compact();
     }
 
-    public String createRefreshToken(String username) {
+    public String createRefreshToken(UUID userId, String username) {
         Claims claims = Jwts.claims().setSubject(username);
+        claims.put("id", userId);
 
         Instant validity = Instant.now().plus(props.getRefresh(), ChronoUnit.HOURS);
         return Jwts.builder()
@@ -60,9 +62,14 @@ public class AuthenticationProvider {
     }
 
     public UsernamePasswordAuthenticationToken getAuthentication(String token) {
+        String id = getIdFromToken(token);
         String username = getUsernameFromToken(token);
         GrantedAuthority authority = getRoleFromToken(token);
-        return new UsernamePasswordAuthenticationToken(username, token, Collections.singletonList(authority));
+        return new UsernamePasswordAuthenticationToken(id, username, Collections.singletonList(authority));
+    }
+
+    public String getIdFromToken(String token) {
+        return parseClaims(token).get("id", String.class);
     }
 
     public String getUsernameFromToken(String token) {
