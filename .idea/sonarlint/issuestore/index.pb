@@ -433,16 +433,12 @@ Rsports-user/src/main/java/org/example/sportsuser/exceptions/InternalException.j
 Usports-user/src/main/java/org/example/sportsuser/exceptions/RestControllerAdvice.java,9\e\9e31ad2625009eb607e479dd57af270b7127f50f
 è
 _sports-user/src/main/java/org/example/sportsuser/controllers/auth/dto/AuthorizationDetails.java,4\e\4e806e8630ca2f3822449eff5565c87d024058e8
-{
-Ksports-user/src/main/java/org/example/sportsuser/utils/SecurityContext.java,5\1\511f35f07b70a3c93052e7b6fa8547eda904b0c4
 r
 Bsports-user/src/test/java/org/example/sportsuser/utils/Models.java,c\3\c31ca1e5bf3ae5273744d73ae1c6f026e8317d6b
 y
 Isports-user/src/test/java/org/example/sportsuser/BaseIntegrationTest.java,c\4\c4b30b6de17b5c5580a1d7657c2714e2646e0ca8
 é
 ^sports-user/src/test/java/org/example/sportsuser/configurations/PostgresAutoConfiguration.java,9\9\995dc52a2938a4d5ae1c19128a39b1df96d2ce5a
-{
-Ksports-user/src/test/java/org/example/sportsuser/utils/SecurityContext.java,6\2\62b79443d9ef03537609b9b6702fe614be4616d6
 Ñ
 Tsports-user/src/test/java/org/example/sportsuser/controllers/AuthControllerTest.java,e\e\eee7ba541e18d651eaf08e9b0434e413359a0fc6
 Ñ

@@ -57,7 +57,7 @@ class UserServiceTest {
             return Mono.just(savedUser);
         });
 
-        StepVerifier.create(userService.block(USER.getUsername()))
+        StepVerifier.create(userService.block(USER.getId()))
                 .expectNextMatches(User::isBlocked)
                 .verifyComplete();
     }
@@ -70,7 +70,7 @@ class UserServiceTest {
             savedUser.setBlocked(false);
             return Mono.just(savedUser);
         });
-        StepVerifier.create(userService.unblock(USER.getUsername()))
+        StepVerifier.create(userService.unblock(USER.getId()))
                 .expectNextMatches(u -> !u.isBlocked())
                 .verifyComplete();
     }
@@ -83,7 +83,7 @@ class UserServiceTest {
             savedUser.setConfirmed(true);
             return Mono.just(savedUser);
         });
-        StepVerifier.create(userService.confirm(USER.getUsername()))
+        StepVerifier.create(userService.confirm(USER.getId()))
                 .expectNextMatches(User::isConfirmed)
                 .verifyComplete();
     }

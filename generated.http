@@ -1,4 +1,4 @@
-POST http://localhost:8080/api/v2/auth
+POST http://localhost:8080/api/v2/auth/tokens
 Content-Type: application/json
 
 {
@@ -7,4 +7,46 @@ Content-Type: application/json
   "nick": "nick",
   "telegram": "telegram",
   "role": "CUSTOMER"
+}
+
+### Test for user registration
+
+POST http://localhost:8080/api/v2/auth
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+
+### Test for getting authorization details (authenticated request)
+
+GET http://localhost:8080/api/v2/auth
+Authorization: Bearer <valid-access-token>
+
+
+### Test for user authorization (login)
+
+POST http://localhost:8080/api/v2/auth/tokens
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+
+### Test for refreshing the authorization token
+
+POST http://localhost:8080/api/v2/auth/tokens/refresh?refresh=<valid-refresh-token>
+Authorization: Bearer <valid-access-token>
+
+### Expected Response (Re-authorization)
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "accessToken": "<new-access-token>",
+  "refreshToken": "<new-refresh-token>"
 }
