@@ -22,6 +22,9 @@ spring:
 springdoc:
   api-docs:
     enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui/index.html
 
 server:
   port: ${PORT:8383}
