@@ -12,6 +12,6 @@ FROM amazoncorretto:17-alpine
 
 WORKDIR /app
 
-COPY --from=build /workspace/build/libs/sports-order-0.0.1-SNAPSHOT.jar ./sports-order.jar
+COPY --from=build /workspace/build/libs/sports-fight-0.0.1-SNAPSHOT.jar ./sports-fight.jar
 
-ENTRYPOINT ["java", "-jar", "sports-order.jar"]
+ENTRYPOINT ["java", "-jar", "sports-fight.jar"]

@@ -1021,8 +1021,6 @@ Q.idea/sonarlint/securityhotspotstore/c/4/c4b30b6de17b5c5580a1d7657c2714e2646e0c
 generated.http,5\5\55a08ba38d73b28d1fc36c781f1256f7624e2a90
 „
 Tsports-order/src/main/java/org/example/sportsorder/configurations/SwaggerConfig.java,b\7\b7652a24fc6bb385b730fbce88a9dedbb5a356b1
-ƒ
-Ssports-order/src/main/java/org/example/sportsorder/configurations/package-info.java,a\8\a8b477c04fa9594ff75144ab1db38174235205d5
 ”
 dsports-order/src/main/java/org/example/sportsorder/configurations/security/AuthenticationFilter.java,3\b\3bd0346c2b09e4f730a4b85dd8d84425fc51d8c2
 ‚
@@ -1034,10 +1032,6 @@ esports-order/src/main/java/org/example/sportsorder/configurations/security/Secu
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 I
 sports-fight/build.gradle,3\3\332d990420e9939b9e4300aa07947d53d9d80ef8
-`
-0sports-fight/src/main/java/org/example/Main.java,2\3\23d22561c6fadbabdedae186f9a165df632bc65d
-K
-sports-fight/.gitattributes,0\8\08b1ee44d71d9a9353411198b26ab2febb6ea641
 L
 sports-fight/settings.gradle,5\e\5e609e0e5be89108c671843c4fff9f1e040907dc
 H
@@ -1046,3 +1040,9 @@ D
 sports-fight/gradlew,d\2\d22da6d32e616122691d279463a707f62c4bd8a9
 G
 sports-fight/Dockerfile,4\5\45b93a9de9a26fe23369012cc18b0a99626f1408
+e
+5sports-fight/gradle/wrapper/gradle-wrapper.properties,7\7\774247bbdc6a09779fa0046f8b62e0fa24b4d2f2
+ƒ
+Ssports-fight/src/test/java/org/example/sportsfight/SportsFightApplicationTests.java,5\0\50153291a333b2d4a4402d6d6de02d73fcc7714b
+~
+Nsports-fight/src/main/java/org/example/sportsfight/SportsFightApplication.java,5\4\5479b468ebe366f0419384379d96fdb82f533a5d
