@@ -10,6 +10,7 @@ public enum ErrorCode {
 
     CITY_NOT_FOUND,
 
-    MUTILATION_NOT_FOUND
+    MUTILATION_NOT_FOUND,
+    VICTIM_NOT_FOUND
 
 }

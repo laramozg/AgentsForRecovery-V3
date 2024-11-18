@@ -3,7 +3,6 @@ package org.example.sportsorder.services;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsorder.exceptions.ErrorCode;
 import org.example.sportsorder.exceptions.InternalException;
-import org.example.sportsorder.models.City;
 import org.example.sportsorder.models.Mutilation;
 import org.example.sportsorder.repositories.MutilationRepository;
 import org.springframework.data.domain.Page;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.UUID;
 
 @RequiredArgsConstructor
