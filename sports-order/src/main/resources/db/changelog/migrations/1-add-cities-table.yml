@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-cities-table
+      author: l.mozgovaya
+      changes:
+        - createTable:
+            schemaName: application
+            tableName: cities
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false

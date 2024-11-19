@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-orders-table
+      author: l.mozgovaya
+      changes:
+        - createTable:
+            schemaName: application
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city_id
+                  type: UUID
+              - column:
+                  name: victim_id
+                  type: UUID
+              - column:
+                  name: deadline
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableSchemaName: application
+            baseTableName: orders
+            baseColumnNames: city_id
+            constraintName: fk_orders_city
+            referencedTableSchemaName: application
+            referencedTableName: cities
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableSchemaName: application
+            baseTableName: orders
+            baseColumnNames: victim_id
+            constraintName: fk_orders_victim
+            referencedTableSchemaName: application
+            referencedTableName: victims
+            referencedColumnNames: id

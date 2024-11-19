@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-mutilations-table
+      author: l.mozgovaya
+      changes:
+        - createTable:
+            schemaName: application
+            tableName: mutilations
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: type
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: BIGINT
+                  constraints:
+                    nullable: false

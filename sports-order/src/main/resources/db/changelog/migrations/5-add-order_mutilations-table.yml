@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-order_mutilations-table
+      author: l.mozgovaya
+      changes:
+        - createTable:
+            schemaName: application
+            tableName: order_mutilations
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: mutilation_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableSchemaName: application
+            baseTableName: order_mutilations
+            baseColumnNames: order_id
+            constraintName: fk_order_mutilations_order
+            referencedTableSchemaName: application
+            referencedTableName: orders
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableSchemaName: application
+            baseTableName: order_mutilations
+            baseColumnNames: mutilation_id
+            constraintName: fk_order_mutilations_mutilation
+            referencedTableSchemaName: application
+            referencedTableName: mutilations
+            referencedColumnNames: id
