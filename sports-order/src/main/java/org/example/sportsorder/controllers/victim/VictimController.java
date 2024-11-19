@@ -1,5 +1,6 @@
 package org.example.sportsorder.controllers.victim;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsorder.controllers.victim.dto.VictimDto;
@@ -41,7 +42,7 @@ public class VictimController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<VictimDto> getAllVictims(
-            @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
+            @Schema(hidden = true) @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
     ) {
         return victimService.findAllVictims(pageable).map(victimMapper::convertToDto);
     }

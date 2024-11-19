@@ -1,5 +1,6 @@
 package org.example.sportsorder.controllers.mutilation;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsorder.controllers.mutilation.dto.MutilationDto;
@@ -37,7 +38,7 @@ public class MutilationController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<MutilationDto> findAllMutilations(
-            @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
+            @Schema(hidden = true) @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
     ) {
         return mutilationService.findAllMutilations(pageable)
                 .map(mutilationMapper::convertToDto);

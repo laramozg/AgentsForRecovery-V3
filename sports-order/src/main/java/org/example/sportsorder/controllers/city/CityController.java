@@ -1,5 +1,6 @@
 package org.example.sportsorder.controllers.city;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsorder.controllers.city.dto.CityDto;
@@ -50,7 +51,7 @@ public class CityController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<CityDto> findAllCities(
-            @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
+            @Schema(hidden = true) @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
     ) {
         return cityService.findAllCities(pageable).map(cityMapper::convertToDto);
     }

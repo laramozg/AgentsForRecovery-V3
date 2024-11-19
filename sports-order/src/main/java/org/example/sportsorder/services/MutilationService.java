@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -42,6 +43,14 @@ public class MutilationService {
 
     public Page<Mutilation> findAllMutilations(Pageable pageable) {
         return mutilationRepository.findAll(pageable);
+    }
+
+    public List<Mutilation> findAllMutilationsById(List<UUID> mutilationIds) {
+        List<Mutilation> mutilations = mutilationRepository.findAllByIdIn(mutilationIds);
+        if (mutilations.size() != mutilationIds.size()) {
+            throw new InternalException(HttpStatus.NOT_FOUND, ErrorCode.MUTILATION_NOT_FOUND);
+        }
+        return mutilations;
     }
 
 }
