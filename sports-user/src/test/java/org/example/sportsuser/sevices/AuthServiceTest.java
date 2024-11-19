@@ -94,8 +94,8 @@ class AuthServiceTest {
     @Test
     void reAuthorizeShouldExecuteSuccessfully() {
         when(authProvider.isValid(any())).thenReturn(true);
-        when(authProvider.getUsernameFromToken(any())).thenReturn(UNAUTHORIZED_USER.getUsername());
-        when(userService.find(UNAUTHORIZED_USER.getUsername())).thenReturn(Mono.just(UNAUTHORIZED_USER));
+        when(authProvider.getIdFromToken(any())).thenReturn(UNAUTHORIZED_USER.getId().toString());
+        when(userService.find(UNAUTHORIZED_USER.getId())).thenReturn(Mono.just(UNAUTHORIZED_USER));
         when(authProvider.createAccessToken(any(), any(), any())).thenReturn("access");
         when(authProvider.createRefreshToken(any(), any())).thenReturn("refresh");
 

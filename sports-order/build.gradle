@@ -13,6 +13,7 @@ java {
     }
 }
 
+
 repositories {
     mavenCentral()
 }
@@ -22,7 +23,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    implementation 'jakarta.persistence:jakarta.persistence-api:3.2.0'
+    implementation 'org.hibernate.orm:hibernate-core:6.1.7.Final'
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
 
     // data base
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

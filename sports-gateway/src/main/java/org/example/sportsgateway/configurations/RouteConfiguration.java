@@ -43,6 +43,21 @@ public class RouteConfiguration {
                         )
                         .uri("lb://" + props.getSportsUser())
                 )
+                .route(props.getSportsOrder() + "-route", r -> r
+                        .path(apiPrefix + "/cities/**",
+                                apiPrefix + "/victims/**",
+                                apiPrefix + "/orders/**",
+                                apiPrefix + "/mutilations/**")
+                        .filters(f -> f
+                                .stripPrefix(2)
+                                .circuitBreaker(cb -> cb
+                                        .setName(props.getSportsOrder() + "-circuit-breaker")
+                                        .setFallbackUri(URI.create("forward:/fallback"))
+                                )
+                                .filter(authFilter.apply(new AuthenticationFilter.Config()))
+                        )
+                        .uri("lb://" + props.getSportsOrder())
+                )
                 .build();
     }
 }

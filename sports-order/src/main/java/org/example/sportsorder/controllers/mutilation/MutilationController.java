@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/mutilation")
+@RequestMapping("/mutilations")
 public class MutilationController {
     public static final int DEFAULT_PAGE_SIZE = 50;
     private final MutilationService mutilationService;

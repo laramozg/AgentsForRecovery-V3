@@ -6,11 +6,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ServiceUrlsProperties {
 
     private final String sportsUser;
-//    private final String sportsOrder;
+    private final String sportsOrder;
 
 
-    public ServiceUrlsProperties(String sportsUser) {
+    public ServiceUrlsProperties(String sportsUser, String sportsOrder) {
         this.sportsUser = sportsUser;
+        this.sportsOrder = sportsOrder;
 
     }
 
@@ -18,4 +19,7 @@ public class ServiceUrlsProperties {
         return sportsUser;
     }
 
+    public String getSportsOrder() {
+        return sportsOrder;
+    }
 }

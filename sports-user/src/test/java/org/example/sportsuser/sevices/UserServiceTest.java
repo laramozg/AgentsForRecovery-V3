@@ -50,7 +50,7 @@ class UserServiceTest {
 
     @Test
     void blockShouldExecuteSuccessfully() {
-        when(userRepository.findByUsername(USER.getUsername())).thenReturn(Mono.just(USER));
+        when(userRepository.findById(USER.getId())).thenReturn(Mono.just(USER));
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> {
             User savedUser = invocation.getArgument(0);
             savedUser.setBlocked(true);
@@ -64,7 +64,7 @@ class UserServiceTest {
 
     @Test
     void unblockShouldExecuteSuccessfully() {
-        when(userRepository.findByUsername(USER.getUsername())).thenReturn(Mono.just(USER));
+        when(userRepository.findById(USER.getId())).thenReturn(Mono.just(USER));
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> {
             User savedUser = invocation.getArgument(0);
             savedUser.setBlocked(false);
@@ -77,7 +77,7 @@ class UserServiceTest {
 
     @Test
     void confirmShouldExecuteSuccessfully() {
-        when(userRepository.findByUsername(USER.getUsername())).thenReturn(Mono.just(USER));
+        when(userRepository.findById(USER.getId())).thenReturn(Mono.just(USER));
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> {
             User savedUser = invocation.getArgument(0);
             savedUser.setConfirmed(true);

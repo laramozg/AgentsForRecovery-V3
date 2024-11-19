@@ -10,15 +10,18 @@ databaseChangeLog:
               - column:
                   name: id
                   type: uuid
-                  defaultValue: gen_random_uuid()
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: mutilation_id
-                  type: UUID
+                  name: order_id
+                  type: uuid
                   constraints:
-                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: mutilation_id
+                  type: uuid
+                  constraints:
                     nullable: false
         - addForeignKeyConstraint:
             baseTableSchemaName: application

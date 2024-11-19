@@ -41,6 +41,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                                     .request(builder -> {
                                         try {
                                             builder
+                                                    .header(Config.USER_ID, response.getId().toString())
                                                     .header(Config.USERNAME, response.getUsername())
                                                     .header(Config.USER_ROLE, new ObjectMapper().writeValueAsString(response.getRole()));
                                         } catch (JsonProcessingException e) {
@@ -57,6 +58,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     }
 
     public static class Config {
+        public static final String USER_ID = "UserId";
         public static final String USERNAME = "Username";
         public static final String USER_ROLE = "UserRole";
         public static final String AUTHORIZATION = "Authorization";

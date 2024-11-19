@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/victim")
+@RequestMapping("/victims")
 public class VictimController {
     public static final int DEFAULT_PAGE_SIZE = 50;
     private final VictimService victimService;

@@ -1,4 +1,4 @@
-POST http://localhost:8080/api/v2/auth/tokens
+POST http://localhost:8080/api/v2/auth
 Content-Type: application/json
 
 {
@@ -32,8 +32,8 @@ POST http://localhost:8080/api/v2/auth/tokens
 Content-Type: application/json
 
 {
-  "username": "testuser",
-  "password": "password123"
+  "username": "user112",
+  "password": "password112"
 }
 
 

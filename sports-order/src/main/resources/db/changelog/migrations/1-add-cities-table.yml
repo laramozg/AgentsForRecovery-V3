@@ -20,11 +20,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: password
-                  type: varchar(64)
-                  constraints:
-                    nullable: false
-              - column:
                   name: region
                   type: VARCHAR(255)
                   constraints:

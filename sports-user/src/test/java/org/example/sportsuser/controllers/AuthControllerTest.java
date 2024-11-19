@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import static org.example.sportsuser.utils.Models.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
-@Disabled
 class AuthControllerTest extends BaseIntegrationTest {
 
     @Test
@@ -43,10 +42,7 @@ class AuthControllerTest extends BaseIntegrationTest {
                         USER_PASSWORD
                 ))
                 .exchange()
-                .expectAll(
-                        result -> result.expectStatus().isCreated(),
-                        result -> result.expectBody(AuthorizeUserResponse.class)
-                );
+                .expectStatus().isBadRequest();
     }
 
     @Test

@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/city")
+@RequestMapping("/cities")
 public class CityController {
     public static final int DEFAULT_PAGE_SIZE = 50;
     private final CityService cityService;

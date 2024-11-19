@@ -19,10 +19,10 @@ public class Victim {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "firstname", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "lastname", nullable = false)
     private String lastName;
 
     @Column(name = "workplace")
