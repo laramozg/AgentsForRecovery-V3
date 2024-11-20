@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-fights-table
+      author: l.mozgovaya
+      changes:
+        - createTable:
+            schemaName: application
+            tableName: fights
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: performer_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableSchemaName: application
+            baseTableName: fights
+            baseColumnNames: performer_id
+            referencedTableSchemaName: application
+            referencedTableName: performers
+            referencedColumnNames: id

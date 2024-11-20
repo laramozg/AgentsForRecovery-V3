@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/v2/cities
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIxIiwiaWQiOiIxZGI1N2RlMS1mZWY2LTQyNDItYWMyNi04MjU5NGQzY2I3YTEiLCJyb2xlIjoiU1VQRVJWSVNPUiIsImV4cCI6MTczMjE0NTczMn0._F50pZPE3fkPa4XReYqWC0LvA-3141wbf28pfmp-d7U47wSMAzf0Y_sqCi_Eb0XK4dGJo1kZBohql6YZ3OmSoA
+UserId: 1db57de1-fef6-4242-ac26-82594d3cb7a1
+Username: superuser1
+UserRole: SUPERVISOR
+
+{
+  "name": "city",
+  "region": "region"
+}

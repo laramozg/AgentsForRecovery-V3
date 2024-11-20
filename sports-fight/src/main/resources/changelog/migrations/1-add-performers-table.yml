@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-performers-table
+      author: l.mozgovaya
+      changes:
+        - createTable:
+            schemaName: application
+            tableName: performers
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: passport_series_number
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: weight
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: height
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: rating
+                  type: DOUBLE
+                  defaultValueNumeric: 0.0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: completed_orders
+                  type: INTEGER
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false

@@ -2,11 +2,11 @@ POST http://localhost:8080/api/v2/auth
 Content-Type: application/json
 
 {
-  "username": "user112",
-  "password": "password112",
-  "nick": "nick",
-  "telegram": "telegram",
-  "role": "CUSTOMER"
+  "username": "superuser1",
+  "password": "superuser1",
+  "nick": "superuser1",
+  "telegram": "superuser1",
+  "role": "SUPERVISOR"
 }
 
 ### Test for user registration
@@ -25,15 +25,17 @@ Content-Type: application/json
 GET http://localhost:8080/api/v2/auth
 Authorization: Bearer <valid-access-token>
 
-
+"access": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIxIiwiaWQiOiIyZjMxMjI2ZS00ZWJiLTRhMzAtYjMxNi0wYmJkZmIzYzE0MTYiLCJyb2xlIjoiU1VQRVJWSVNPUiIsImV4cCI6MTczMjE0MDIyOH0.HmHMVpM1YyJVUX8GWqw66qF759ekVRUdXHGZpXx6v1bUiQosfn9N6Xe4zK2D8Xan2V6bBabiDlHIL0NgW9Rd8w",
+  "refresh": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIxIiwiaWQiOiIyZjMxMjI2ZS00ZWJiLTRhMzAtYjMxNi0wYmJkZmIzYzE0MTYiLCJleHAiOjE3MzIyMjMwMjh9.8LVvngJf92U2Meqfq4joaORaI0qV8oQa5AgcaAT5eB6EtsigPNy0dYoaUw2KIGQjNnaouuvPQX8jqzXz63NBVQ"
+}
 ### Test for user authorization (login)
 
 POST http://localhost:8080/api/v2/auth/tokens
 Content-Type: application/json
 
 {
-  "username": "user112",
-  "password": "password112"
+  "username": "superuser1",
+  "password": "superuser1"
 }
 
 

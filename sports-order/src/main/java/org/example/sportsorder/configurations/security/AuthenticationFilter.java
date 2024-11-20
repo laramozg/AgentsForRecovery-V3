@@ -15,6 +15,9 @@ import java.util.List;
 
 @Component
 public class AuthenticationFilter extends OncePerRequestFilter {
+    private static final String USER_ID = "UserId";
+    private static final String USERNAME = "Username";
+    private static final String USER_ROLE = "UserRole";
 
     @Override
     protected void doFilterInternal(
@@ -24,10 +27,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     ) throws IOException, ServletException {
         String userId = request.getHeader(USER_ID);
         String username = request.getHeader(USERNAME);
-        String userRole  = request.getHeader(USER_ROLES);
+        String userRole  = request.getHeader(USER_ROLE);
 
         if (userId != null && username != null && !username.isBlank() && userRole  != null) {
-            SimpleGrantedAuthority authority  = new SimpleGrantedAuthority(userRole);
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole);
 
             SecurityContextHolder.getContext().setAuthentication(
                     new UsernamePasswordAuthenticationToken(userId, username, List.of(authority))
@@ -37,7 +40,4 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private static final String USER_ID = "UserId";
-    private static final String USERNAME = "Username";
-    private static final String USER_ROLES = "UserRoles";
 }

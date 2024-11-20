@@ -12,6 +12,9 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class AuthenticationFilter implements WebFilter {
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String BEARER_PREFIX = "Bearer ";
+    private static final int BEARER_PREFIX_LENGTH = 7;
 
     private final AuthenticationProvider authenticationProvider;
 
@@ -43,7 +46,4 @@ public class AuthenticationFilter implements WebFilter {
         }
     }
 
-    private static final String AUTHORIZATION = "Authorization";
-    private static final String BEARER_PREFIX = "Bearer ";
-    private static final int BEARER_PREFIX_LENGTH = BEARER_PREFIX.length();
 }

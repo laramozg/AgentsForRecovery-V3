@@ -29,7 +29,7 @@ public class User {
     @Column("telegram")
     private String telegram;
     @Column("confirmed")
-       private boolean confirmed = false;
+    private boolean confirmed = false;
     @Column("confirmed_username")
     private boolean confirmedUsername = false;
     @Column("blocked")

@@ -1,0 +1,42 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/sports_fight}
+    username: ${DB_USER:username}
+    password: ${DB_PASSWORD:password}
+
+  cloud:
+    config:
+      enabled: false
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+            loggerLevel: basic
+      sports-order:
+        name: ${SPORTS_ORDER_NAME:sports-order}
+        url: ${SPORTS_ORDER_URL:sports-order}
+
+eureka:
+  client:
+    enabled: false
+
+api:
+  job:
+    scheduler:
+      process-debt: "0 * * * * *"
+#0 0 0 ? * MON#1
+
+management:
+  endpoints:
+    web.exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always
