@@ -7,7 +7,6 @@ import org.example.sportsorder.controllers.order.dto.OrderRequest;
 import org.example.sportsorder.models.Mutilation;
 import org.example.sportsorder.models.Order;
 import org.example.sportsorder.models.OrderMutilation;
-import org.example.sportsorder.models.enums.OrderStatus;
 import org.example.sportsorder.services.CityService;
 import org.example.sportsorder.services.MutilationService;
 import org.example.sportsorder.services.VictimService;

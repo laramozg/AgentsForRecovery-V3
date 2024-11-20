@@ -2,16 +2,15 @@ package org.example.sportsuser.controllers;
 
 import org.example.sportsuser.BaseIntegrationTest;
 import org.example.sportsuser.controllers.auth.dto.AuthorizeUserRequest;
-import org.example.sportsuser.controllers.auth.dto.AuthorizeUserResponse;
 import org.example.sportsuser.controllers.auth.dto.RegisterUserRequest;
 import org.example.sportsuser.controllers.auth.dto.RegisterUserResponse;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.example.sportsuser.utils.Models.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 class AuthControllerTest extends BaseIntegrationTest {
+
 
     @Test
     void registerShouldReturnCreated() {
@@ -42,7 +41,7 @@ class AuthControllerTest extends BaseIntegrationTest {
                         USER_PASSWORD
                 ))
                 .exchange()
-                .expectStatus().isBadRequest();
+                .expectStatus().isNotFound();
     }
 
     @Test

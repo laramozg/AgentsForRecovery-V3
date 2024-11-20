@@ -34,7 +34,7 @@ public abstract class BaseIntegrationTest extends PostgresAutoConfiguration {
     }
 
     private void createUserIfNotExist() {
-        Mono.justOrEmpty(userRepository.findByUsername(USER.getUsername()))
+        Mono.justOrEmpty(userRepository.findById(USER.getId()))
                 .switchIfEmpty(Mono.defer(() -> Mono.just(userRepository.save(USER))))
                 .block();
     }

@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public class Models {
 
-    public static final String USER_PASSWORD = "12345";
-    public static final String ENCODED_USER_PASSWORD = "$2a$10$.IEUyyxTZjIGYnDHOcFW3e8AD5QFAKWj7nu7NM1NfBs.wE6AtC83a";
+    public static final String USER_PASSWORD = "password112";
+    public static final String ENCODED_USER_PASSWORD = "$2a$10$fsRVtIIhXIStL94e3UJA7uAonxOIb.Pd2a4dr9Uq0tw0YKqZubHIm";
 
     public static User USER = User.builder()
             .id(UUID.fromString("37790e1b-2d12-4e3e-b222-522e81e90205"))

@@ -22,7 +22,6 @@ public class AuthController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-//    @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
     public Mono<RegisterUserResponse> register(@Valid @RequestBody Mono<RegisterUserRequest> request) {
         log.info("Received registration request");
         return request.map(authMapper::convert)
