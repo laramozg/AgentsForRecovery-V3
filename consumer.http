@@ -1,11 +1,40 @@
 POST http://localhost:8080/api/v2/cities
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIxIiwiaWQiOiIxZGI1N2RlMS1mZWY2LTQyNDItYWMyNi04MjU5NGQzY2I3YTEiLCJyb2xlIjoiU1VQRVJWSVNPUiIsImV4cCI6MTczMjE0NTczMn0._F50pZPE3fkPa4XReYqWC0LvA-3141wbf28pfmp-d7U47wSMAzf0Y_sqCi_Eb0XK4dGJo1kZBohql6YZ3OmSoA
-UserId: 1db57de1-fef6-4242-ac26-82594d3cb7a1
-Username: superuser1
-UserRole: SUPERVISOR
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIxIiwiaWQiOiIwNzU4ZmIyZi1mYjgxLTQ0OGYtOTFlNC00Yzk3YTg4YTdlZmMiLCJyb2xlcyI6WyJTVVBFUlZJU09SIl0sImV4cCI6MTczMjMxMzY1MH0._rRWyzSPwaQzGUm4a4mzlqF2ydgIpMGzLgp6Hq9rggpDnAjf6Y3JI42Z2Yi3mTkO7Y8BpT7sQme8uYRTQjeapg
+
+
+{
+  "name": "city2",
+  "region": "region2"
+}
+
+
+###
+PUT http://localhost:8080/api/v2/cities/545a6185-5c91-4646-8fcb-5cd2345acc6d
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIxIiwiaWQiOiIwNzU4ZmIyZi1mYjgxLTQ0OGYtOTFlNC00Yzk3YTg4YTdlZmMiLCJyb2xlcyI6WyJTVVBFUlZJU09SIl0sImV4cCI6MTczMjMxMzY1MH0._rRWyzSPwaQzGUm4a4mzlqF2ydgIpMGzLgp6Hq9rggpDnAjf6Y3JI42Z2Yi3mTkO7Y8BpT7sQme8uYRTQjeapg
+Content-Type: application/json
 
 {
   "name": "city",
   "region": "region"
 }
+###
+
+GET http://localhost:8080/api/v2/cities
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIxIiwiaWQiOiIwNzU4ZmIyZi1mYjgxLTQ0OGYtOTFlNC00Yzk3YTg4YTdlZmMiLCJyb2xlcyI6WyJTVVBFUlZJU09SIl0sImV4cCI6MTczMjMxMzY1MH0._rRWyzSPwaQzGUm4a4mzlqF2ydgIpMGzLgp6Hq9rggpDnAjf6Y3JI42Z2Yi3mTkO7Y8BpT7sQme8uYRTQjeapg
+
+###
+POST http://localhost:8080/api/v2/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTExIiwiaWQiOiIwZmJmYjA4My0wN2EzLTRkMTktYWFhZC04YjQ4M2VmMTA4NjkiLCJyb2xlcyI6WyJDVVNUT01FUiJdLCJleHAiOjE3MzIzMTQxMzd9.ra3AXikL_6Ga7iLmWYmyJcRPPgVY8Qy3jCvY6D_0k5FzzB1fW0Qyud1-8m9oM7rBuH-zYZkJIwNPi_D6WRyugw
+
+
+{
+  "cityId": "9dbad153-48ac-4f32-9685-41f34adf3b51",
+  "victimId": "4ea88e56-147e-489f-afd2-73c854c0d177",
+  "deadline": "2024-12-01",
+  "mutilationIds": ["90085aff-0af2-4aee-95b8-30cffa3b5919"]
+}
+
+
+###

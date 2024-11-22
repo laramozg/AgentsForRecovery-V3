@@ -1,7 +1,10 @@
 package org.example.sportsgateway.configurations;
 
+import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.bind.ConstructorBinding;
 
+@Getter
 @ConfigurationProperties(prefix = "spring.services.urls")
 public class ServiceUrlsProperties {
 
@@ -15,11 +18,4 @@ public class ServiceUrlsProperties {
 
     }
 
-    public String getSportsUser() {
-        return sportsUser;
-    }
-
-    public String getSportsOrder() {
-        return sportsOrder;
-    }
 }

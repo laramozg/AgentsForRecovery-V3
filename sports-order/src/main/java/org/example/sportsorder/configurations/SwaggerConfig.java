@@ -27,7 +27,7 @@ public class SwaggerConfig {
                         )
                 )
                 .info(
-                        new Info().title("Sports API").version("1.0")
+                        new Info().title("Sports Order API").version("1.0")
                 );
     }
 }

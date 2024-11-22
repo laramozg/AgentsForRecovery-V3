@@ -65,6 +65,6 @@ class OrderServiceTest {
         UUID id = UUID.randomUUID();
         when(orderRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(InternalException.class, () -> orderService.findOrderById(id));
+        assertThrows(InternalException.class, () -> orderService.find(id));
     }
 }
