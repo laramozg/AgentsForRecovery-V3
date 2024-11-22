@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PerformerRepository extends JpaRepository<Performer, UUID> {
+    Performer findPerformerById(UUID id);
 
-    Optional<Performer> findById(UUID id);
+    Performer findPerformerByUsername(String username);
 }

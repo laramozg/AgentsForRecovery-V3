@@ -9,6 +9,8 @@ import org.example.sportsorder.controllers.mutilation.dto.MutilationResponse;
 import org.example.sportsorder.mappers.MutilationMapper;
 import org.example.sportsorder.models.Mutilation;
 import org.example.sportsorder.services.MutilationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -25,12 +27,15 @@ public class MutilationController {
     public static final int DEFAULT_PAGE_SIZE = 50;
     private final MutilationService mutilationService;
     private final MutilationMapper mutilationMapper;
+    private static final Logger logger = LoggerFactory.getLogger(MutilationController.class);
+
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR', 'CUSTOMER')")
     public MutilationResponse create(
             @Valid @RequestBody MutilationRequest mutilationRequest) {
+        logger.trace("Create mutilation request: {}", mutilationRequest);
         UUID mutilation = mutilationService.createMutilation(mutilationMapper.convertToEntity(mutilationRequest));
         return new MutilationResponse(mutilation);
     }
@@ -40,6 +45,7 @@ public class MutilationController {
     public Page<MutilationDto> findAllMutilations(
             @Schema(hidden = true) @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
     ) {
+        logger.trace("Find all mutilations");
         return mutilationService.findAllMutilations(pageable)
                 .map(mutilationMapper::convertToDto);
     }
@@ -47,6 +53,7 @@ public class MutilationController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public MutilationDto findMutilationById(@PathVariable UUID id) {
+        logger.trace("Find mutilation by id: {}", id);
         return mutilationMapper.convertToDto(mutilationService.find(id));
     }
 
@@ -56,6 +63,7 @@ public class MutilationController {
     public MutilationDto update(
             @PathVariable UUID id,
             @RequestBody MutilationRequest mutilationRequest) {
+        logger.trace("Update mutilation request: {}", mutilationRequest);
         Mutilation mutilation = mutilationService.updateMutilation(id, mutilationMapper.convertToEntity(mutilationRequest));
         return mutilationMapper.convertToDto(mutilation);
     }
@@ -64,6 +72,7 @@ public class MutilationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
     public void delete(@PathVariable UUID id) {
+        logger.trace("Delete mutilation by id: {}", id);
         mutilationService.deleteMutilation(id);
     }
 }

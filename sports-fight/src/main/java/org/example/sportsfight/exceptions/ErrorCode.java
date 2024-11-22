@@ -7,6 +7,7 @@ public enum ErrorCode {
 
     // user errors
     FORBIDDEN,
-    PERFORMER_NOT_FOUND
+    PERFORMER_NOT_FOUND,
+    FIGHT_NOT_FOUND
 
 }

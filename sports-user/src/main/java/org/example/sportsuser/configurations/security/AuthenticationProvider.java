@@ -14,6 +14,7 @@ import javax.crypto.SecretKey;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class AuthenticationProvider {
@@ -36,10 +37,10 @@ public class AuthenticationProvider {
     }
 
 
-    public String createAccessToken(UUID userId, String username, Role role) {
+    public String createAccessToken(UUID userId, String username, Set<Role> roles) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("id", userId);
-        claims.put("role", role.name());
+        claims.put("roles", roles);
 
         Instant validity = Instant.now().plus(props.getAccess(), ChronoUnit.HOURS);
         return Jwts.builder()
@@ -64,8 +65,8 @@ public class AuthenticationProvider {
     public UsernamePasswordAuthenticationToken getAuthentication(String token) {
         String id = getIdFromToken(token);
         String username = getUsernameFromToken(token);
-        GrantedAuthority authority = getRoleFromToken(token);
-        return new UsernamePasswordAuthenticationToken(id, username, Collections.singletonList(authority));
+        List<GrantedAuthority> authority = getRolesFromToken(token);
+        return new UsernamePasswordAuthenticationToken(id, username, authority);
     }
 
     public String getIdFromToken(String token) {
@@ -76,9 +77,12 @@ public class AuthenticationProvider {
         return parseClaims(token).getSubject();
     }
 
-    private GrantedAuthority getRoleFromToken(String token) {
-        String role = parseClaims(token).get("role", String.class);
-        return new SimpleGrantedAuthority(role);
+    private List<GrantedAuthority> getRolesFromToken(String token) {
+        List<?> roles = (List<?>) parseClaims(token).get("roles");
+        return roles.stream()
+                .map(String.class::cast)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     private Claims parseClaims(String token) {

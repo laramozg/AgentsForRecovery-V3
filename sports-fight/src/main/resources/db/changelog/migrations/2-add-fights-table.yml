@@ -35,4 +35,5 @@ databaseChangeLog:
             baseColumnNames: performer_id
             referencedTableSchemaName: application
             referencedTableName: performers
+            constraintName: fk_fights_performer
             referencedColumnNames: id

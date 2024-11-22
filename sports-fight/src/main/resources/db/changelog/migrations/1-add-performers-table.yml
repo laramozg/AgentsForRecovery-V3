@@ -15,8 +15,8 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: user_id
-                  type: uuid
+                  name: username
+                  type: varchar(64)
                   constraints:
                     nullable: false
                     unique: true

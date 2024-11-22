@@ -1,11 +1,71 @@
-POST http://localhost:8080/api/v2/cities
+POST http://localhost:8080/api/v2/auth
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIxIiwiaWQiOiIxZGI1N2RlMS1mZWY2LTQyNDItYWMyNi04MjU5NGQzY2I3YTEiLCJyb2xlIjoiU1VQRVJWSVNPUiIsImV4cCI6MTczMjE0NTczMn0._F50pZPE3fkPa4XReYqWC0LvA-3141wbf28pfmp-d7U47wSMAzf0Y_sqCi_Eb0XK4dGJo1kZBohql6YZ3OmSoA
-UserId: 1db57de1-fef6-4242-ac26-82594d3cb7a1
-Username: superuser1
-UserRole: SUPERVISOR
 
 {
-  "name": "city",
-  "region": "region"
+  "username": "customer2",
+  "password": "customer2",
+  "nick": "customer2",
+  "telegram": "customer2",
+  "role": "CUSTOMER"
 }
+###
+
+POST http://localhost:8080/api/v2/auth/tokens
+Content-Type: application/json
+
+{
+  "username": "customer2",
+  "password": "customer2"
+}
+
+###
+
+  "id": "dbc0ce06-c43c-4110-a4b9-4a9cb9e80ac0",
+"username": "customer2",
+"access": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjQ4NDg4NH0.qqXRusZh6H7Nt8iBOVkVOD1UeyvfgsTry_CJ5zYXt8hJR-ePg501rVvgcpkdZ24lMQb2fvcn_c8W3tAZ13q8Uw",
+"refresh": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsImV4cCI6MTczMjU2NzY4NH0.L41p1Sa7Xdp0Mrs_RBOx9xrNLVZE-3L8py3IFPGJ2dXqw_U858cZEBvKiQIWUfjl20nltO5Q24tAi8tILW_eow"
+}
+
+###
+
+POST http://localhost:8080/api/v2/cities
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjQ4NDg4NH0.qqXRusZh6H7Nt8iBOVkVOD1UeyvfgsTry_CJ5zYXt8hJR-ePg501rVvgcpkdZ24lMQb2fvcn_c8W3tAZ13q8Uw
+
+
+{
+  "name": "city2",
+  "region": "region2"
+}
+
+
+###
+
+GET http://localhost:8080/api/v2/cities
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjQ4NDg4NH0.qqXRusZh6H7Nt8iBOVkVOD1UeyvfgsTry_CJ5zYXt8hJR-ePg501rVvgcpkdZ24lMQb2fvcn_c8W3tAZ13q8Uw
+
+###
+
+GET http://localhost:8080/api/v2/mutilations
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjQ4NDg4NH0.qqXRusZh6H7Nt8iBOVkVOD1UeyvfgsTry_CJ5zYXt8hJR-ePg501rVvgcpkdZ24lMQb2fvcn_c8W3tAZ13q8Uw
+
+###
+
+
+GET http://localhost:8080/api/v2/victims
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjQ4NDg4NH0.qqXRusZh6H7Nt8iBOVkVOD1UeyvfgsTry_CJ5zYXt8hJR-ePg501rVvgcpkdZ24lMQb2fvcn_c8W3tAZ13q8Uw
+
+###
+POST http://localhost:8080/api/v2/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjQ4NDg4NH0.qqXRusZh6H7Nt8iBOVkVOD1UeyvfgsTry_CJ5zYXt8hJR-ePg501rVvgcpkdZ24lMQb2fvcn_c8W3tAZ13q8Uw
+
+
+{
+  "cityId": "3dcb5da0-0fd6-4f44-b9bc-6604bafde2ce",
+  "victimId": "80462d03-8494-46f6-8b4e-acd8ceb0b11d",
+  "deadline": "2024-12-01",
+  "mutilationIds": ["6477736b-6690-4ed7-9b8c-55f0c4fe3e33"]
+}
+
+###

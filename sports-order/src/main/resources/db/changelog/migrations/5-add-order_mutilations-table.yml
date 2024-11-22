@@ -8,12 +8,6 @@ databaseChangeLog:
             tableName: order_mutilations
             columns:
               - column:
-                  name: id
-                  type: uuid
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-              - column:
                   name: order_id
                   type: uuid
                   constraints:
@@ -23,6 +17,10 @@ databaseChangeLog:
                   type: uuid
                   constraints:
                     nullable: false
+        - addPrimaryKey:
+            schemaName: application
+            tableName: order_mutilations
+            columnNames: order_id, mutilation_id
         - addForeignKeyConstraint:
             baseTableSchemaName: application
             baseTableName: order_mutilations

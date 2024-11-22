@@ -14,12 +14,20 @@ public class SwaggerConfigurations {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
-                .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
-                .components(new Components().addSecuritySchemes("Bearer Authentication",
-                        new SecurityScheme()
-                                .type(SecurityScheme.Type.HTTP)
-                                .bearerFormat("JWT")
-                                .scheme("bearer")))
-                .info(new Info().title("SportsFight API").version("1.0"));
+                .addSecurityItem(
+                        new SecurityRequirement().addList("Bearer Authentication")
+                )
+                .components(
+                        new Components().addSecuritySchemes(
+                                "Bearer Authentication",
+                                new SecurityScheme()
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .bearerFormat("JWT")
+                                        .scheme("bearer")
+                        )
+                )
+                .info(
+                        new Info().title("SportsFight API").version("1.0")
+                );
     }
 }

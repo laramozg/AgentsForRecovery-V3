@@ -1,5 +1,6 @@
 package org.example.sportsuser.configurations.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Configuration
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
@@ -42,12 +44,14 @@ public class SecurityConfiguration {
                         .pathMatchers("/**").authenticated()
                 )
                 .addFilterBefore(authenticationFilter, SecurityWebFiltersOrder.AUTHORIZATION)
-                .exceptionHandling(exceptionHandling -> exceptionHandling
-                        .authenticationEntryPoint((exchange, e) ->
-                                Mono.fromRunnable(() -> exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED)))
-                        .accessDeniedHandler((exchange, e) ->
-                                Mono.fromRunnable(() -> exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN)))
-                )
+                .exceptionHandling(exceptionHandling -> {
+                    exceptionHandling.authenticationEntryPoint((exchange, e) ->
+                            Mono.fromRunnable(() -> exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED))
+                    );
+                    exceptionHandling.accessDeniedHandler((exchange, e) ->
+                            Mono.fromRunnable(() -> exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN))
+                    );
+                })
                 .build();
     }
 

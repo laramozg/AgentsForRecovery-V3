@@ -1,4 +1,4 @@
-package org.example.sportsdiscovery.configuration;
+package org.example.sportsdiscovery.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -6,9 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.sportsorder.controllers.order.dto.OrderDto;
 import org.example.sportsorder.controllers.order.dto.OrderRequest;
 import org.example.sportsorder.controllers.order.dto.OrderResponse;
+import org.example.sportsorder.controllers.order.dto.OrderUpdateResponse;
 import org.example.sportsorder.mappers.OrderMapper;
-import org.example.sportsorder.models.Order;
 import org.example.sportsorder.services.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -25,12 +27,14 @@ public class OrderController {
     public static final int DEFAULT_PAGE_SIZE = 50;
     private final OrderService orderService;
     private final OrderMapper orderMapper;
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('CUSTOMER')")
     public OrderResponse createOrder(@Valid @RequestBody OrderRequest request) {
-        UUID order = orderService.createOrder(orderMapper.convertToEntity(request));
+        logger.trace("Create order request: {}", request);
+        UUID order = orderService.createOrder(orderMapper.convertToEntity(request), request.mutilationIds());
         return new OrderResponse(order);
     }
 
@@ -40,6 +44,7 @@ public class OrderController {
     public Page<OrderDto> findOrdersWithStatusWait(
             @Schema(hidden = true)@PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
     ) {
+        logger.trace("Find orders with status wait");
         return orderService.findOrdersWithStatusWait(pageable).map(orderMapper::convertToDto);
     }
 
@@ -48,7 +53,7 @@ public class OrderController {
     public Page<OrderDto> findOrdersByUsername(
             @Schema(hidden = true) @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable
     ) {
-
+        logger.trace("Find orders by username");
         return orderService.findOrdersByUsername(pageable).map(orderMapper::convertToDto);
     }
 
@@ -57,7 +62,15 @@ public class OrderController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR', 'CUSTOMER')")
     public void deleteOrder(@PathVariable UUID id) {
+        logger.trace("Delete order with id: {}", id);
         orderService.deleteOrder(id);
+    }
+
+    @PutMapping("/{id}/{status}")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderUpdateResponse updateStatus(@PathVariable UUID id, @PathVariable String status){
+        logger.trace("Update order with status: {}", status);
+        return orderMapper.convert(orderService.updateStatus(id, status));
     }
 
 }

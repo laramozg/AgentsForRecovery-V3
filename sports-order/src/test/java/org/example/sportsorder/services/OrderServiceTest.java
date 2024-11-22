@@ -44,7 +44,7 @@ class OrderServiceTest {
     void shouldCreateOrder() {
         when(orderRepository.save(any(Order.class))).thenReturn(testOrder);
 
-        UUID createdId = orderService.createOrder(testOrder);
+        UUID createdId = orderService.createOrder(testOrder,null);
 
         assertEquals(testOrder.getId(), createdId);
     }
@@ -65,6 +65,6 @@ class OrderServiceTest {
         UUID id = UUID.randomUUID();
         when(orderRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(InternalException.class, () -> orderService.findOrderById(id));
+        assertThrows(InternalException.class, () -> orderService.find(id));
     }
 }

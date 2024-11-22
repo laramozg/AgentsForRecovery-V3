@@ -19,8 +19,8 @@ public class Performer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "user_id", nullable = false, unique = true)
-    private UUID userId;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
 
     @Column(name = "passport_series_number", nullable = false)
     private String passportSeriesNumber;

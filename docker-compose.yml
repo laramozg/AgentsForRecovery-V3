@@ -45,6 +45,7 @@ services:
 
       SPORTS_USER_NAME: sports-user
       SPORTS_ORDER_NAME: sports_order
+      SPORTS_FIGHT_NAME: sports_fight
 
       # sports-user
       SPORTS_USER_R2DBC_URL: r2dbc:postgresql://sports-postgres:5432/sports_user
@@ -58,11 +59,11 @@ services:
       SPORTS_ORDER_JDBC_URL: jdbc:postgresql://sports-postgres:5432/sports_order
       SPORTS_ORDER_DB_USER: username
       SPORTS_ORDER_DB_PASSWORD: password
-      # sports-process
-#      SPORTS_PROCESS_JDBC_URL: jdbc:postgresql://sports-postgres:5432/sports_process
-#      SPORTS_PROCESS_DB_USER: username
-#      SPORTS_PROCESS_DB_PASSWORD: password
-#      SPORTS_ORDER_URL: sports_order
+      # sports-fight
+      SPORTS_FIGHT_JDBC_URL: jdbc:postgresql://sports-postgres:5432/sports_fight
+      SPORTS_FIGHT_DB_USER: username
+      SPORTS_FIGHT_DB_PASSWORD: password
+      SPORTS_ORDER_URL: sports_order
 
     depends_on:
       - sports-discovery
@@ -146,3 +147,22 @@ services:
     profiles:
       - cloud
 
+  sports-fight:
+    container_name: sports-fight
+    image: sports-fight
+    ports:
+      - "8387:8387"
+    build:
+      context: "sports-fight"
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: cloud
+      DISCOVERY_SERVER_URL: http://eureka_client:eureka_password@sports-discovery:8761/eureka
+      PORT: 8387
+    depends_on:
+      - sports-postgres
+      - sports-discovery
+      - sports-config
+      - sports-gateway
+    profiles:
+      - cloud

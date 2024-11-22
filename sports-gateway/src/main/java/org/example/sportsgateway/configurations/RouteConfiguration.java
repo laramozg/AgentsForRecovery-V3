@@ -54,9 +54,22 @@ public class RouteConfiguration {
                                         .setName(props.getSportsOrder() + "-circuit-breaker")
                                         .setFallbackUri(URI.create("forward:/fallback"))
                                 )
-                                .filter(authFilter.apply(new AuthenticationFilter.Config()))
+                                 .filter(authFilter.apply(new AuthenticationFilter.Config()))
                         )
                         .uri("lb://" + props.getSportsOrder())
+                )
+                .route(props.getSportsFight() + "-route", r -> r
+                        .path(apiPrefix + "/performers/**",
+                                apiPrefix + "/fights/**")
+                        .filters(f -> f
+                                .stripPrefix(2)
+                                .circuitBreaker(cb -> cb
+                                        .setName(props.getSportsFight() + "-circuit-breaker")
+                                        .setFallbackUri(URI.create("forward:/fallback"))
+                                )
+                                .filter(authFilter.apply(new AuthenticationFilter.Config()))
+                        )
+                        .uri("lb://" + props.getSportsFight())
                 )
                 .build();
     }
