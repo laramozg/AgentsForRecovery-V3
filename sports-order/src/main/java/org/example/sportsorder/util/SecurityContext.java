@@ -1,6 +1,5 @@
 package org.example.sportsorder.util;
 
-import lombok.extern.slf4j.Slf4j;
 import org.example.sportsorder.exceptions.ErrorCode;
 import org.example.sportsorder.exceptions.InternalException;
 import org.springframework.http.HttpStatus;
@@ -9,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.UUID;
 
-@Slf4j
+
 public class SecurityContext {
     private SecurityContext() {}
 

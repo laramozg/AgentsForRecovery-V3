@@ -66,7 +66,7 @@ public class OrderController {
         orderService.deleteOrder(id);
     }
 
-    @PutMapping("/{id}/{status}")
+    @PostMapping("/{id}/{status}")
     @ResponseStatus(HttpStatus.OK)
     public OrderUpdateResponse updateStatus(@PathVariable UUID id, @PathVariable String status){
         logger.trace("Update order with status: {}", status);

@@ -29,7 +29,7 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/v2/performers
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6ImM3OTU4NjcwLTU4OTUtNGFlZi1iZjAxLTJkYmNhM2UxNTVlMiIsInJvbGVzIjpbIkVYRUNVVE9SIl0sImV4cCI6MTczMjQ4NDk5NX0.iC8e8O0cqApMysdjI-avOvJysbOK6S0g5I-ZB7v-e9OdnBb8YOcGTf-DZ5N--xnXyyase9bftK668ImeGcJeiQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6IjdiMWY1YzdlLTM0ZjYtNGE0Mi04Mjc3LTY2MWE3YTFiOWVlNiIsInJvbGVzIjpbIkVYRUNVVE9SIl0sImV4cCI6MTczMjU1MDY2NX0._es6Of1ULg0GllD2DPXXoZ6UJyWzC6Wg_mnbtpPTrL6HbwaVBv9If8b133QrgdUPKCg9Xl5oMLEdll-G4rG0sQ
 
 
 {
@@ -42,12 +42,12 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6ImM3O
 
 POST http://localhost:8080/api/v2/fights
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6ImM3OTU4NjcwLTU4OTUtNGFlZi1iZjAxLTJkYmNhM2UxNTVlMiIsInJvbGVzIjpbIkVYRUNVVE9SIl0sImV4cCI6MTczMjQ4NDk5NX0.iC8e8O0cqApMysdjI-avOvJysbOK6S0g5I-ZB7v-e9OdnBb8YOcGTf-DZ5N--xnXyyase9bftK668ImeGcJeiQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6IjdiMWY1YzdlLTM0ZjYtNGE0Mi04Mjc3LTY2MWE3YTFiOWVlNiIsInJvbGVzIjpbIkVYRUNVVE9SIl0sImV4cCI6MTczMjU1MDY2NX0._es6Of1ULg0GllD2DPXXoZ6UJyWzC6Wg_mnbtpPTrL6HbwaVBv9If8b133QrgdUPKCg9Xl5oMLEdll-G4rG0sQ
 
 
 {
-  "performerId": "9498a678-fa08-4d1c-bf4c-8c88f7d96598",
-  "orderId": "e0771eee-3ae7-4285-97be-a5e6fd333d3c"
+  "performerId": "b611357e-f1d0-4561-8146-806ff0a7ebc1",
+  "orderId": "acdf6448-9682-498e-a58e-b37d451826d5"
 }
 
 ###

@@ -1,6 +1,5 @@
 package org.example.sportsuser.configurations.security;
 
-import lombok.extern.slf4j.Slf4j;
 import org.example.sportsuser.exceptions.ErrorCode;
 import org.example.sportsuser.exceptions.InternalException;
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,6 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
-@Slf4j
 @Component
 public class AuthenticationFilter implements WebFilter {
     private static final String AUTHORIZATION = "Authorization";
@@ -35,7 +33,6 @@ public class AuthenticationFilter implements WebFilter {
         }
 
         if (bearerToken != null) {
-            log.info(bearerToken);
             if (authenticationProvider.isValid(bearerToken)) {
                 var auth = authenticationProvider.getAuthentication(bearerToken);
                 return chain.filter(exchange)

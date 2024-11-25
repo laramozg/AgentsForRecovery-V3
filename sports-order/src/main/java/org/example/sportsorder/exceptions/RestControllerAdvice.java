@@ -2,6 +2,7 @@ package org.example.sportsorder.exceptions;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ServerWebInputException;
 
+@Slf4j
 @ControllerAdvice
 public class RestControllerAdvice {
 
     @ApiResponse(responseCode = "500", useReturnTypeSchema = true)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> defaultHandler(Exception ex) {
+        log.error(ex.getMessage(), ex);
         return new Error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ErrorCode.SERVICE_UNAVAILABLE)
                 .asResponseEntity();
     }

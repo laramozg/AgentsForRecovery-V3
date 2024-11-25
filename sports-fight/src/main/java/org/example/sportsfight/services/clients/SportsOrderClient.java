@@ -15,7 +15,7 @@ import java.util.UUID;
 public interface SportsOrderClient {
 
     @Headers("Content-Type: application/json")
-    @RequestMapping(method = RequestMethod.PUT, value = "/orders/{id}/{status}")
+    @RequestMapping(method = RequestMethod.POST, value = "/orders/{id}/{status}")
     OrderDto updateStatusOrder(@PathVariable("id") UUID id, @PathVariable("status") String status);
 
 }

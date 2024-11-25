@@ -8,7 +8,6 @@ import org.example.sportsfight.models.Fight;
 import org.example.sportsfight.models.Performer;
 import org.example.sportsfight.models.enums.FightStatus;
 import org.example.sportsfight.repositories.FightRepository;
-import org.example.sportsfight.repositories.PerformerRepository;
 import org.example.sportsfight.services.clients.SportsOrderClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +33,8 @@ public class FightService {
         logger.info("Creating fight");
         return Mono.fromCallable(() -> {
             fight.setStatus(FightStatus.PENDING);
-            logger.info("1");
-            sportsOrderClient.updateStatusOrder(fight.getId(),"PERFORMANCE");
-            logger.info("2");
+            sportsOrderClient.updateStatusOrder(fight.getOrderId(),"PERFORMANCE");
             Fight savedFight = fightRepository.save(fight);
-            logger.info("3");
             return savedFight.getId();
         }).subscribeOn(Schedulers.boundedElastic());
     }
