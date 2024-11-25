@@ -4,6 +4,7 @@ import org.example.sportsuser.BaseIntegrationTest;
 import org.example.sportsuser.controllers.auth.dto.AuthorizeUserRequest;
 import org.example.sportsuser.controllers.auth.dto.RegisterUserRequest;
 import org.example.sportsuser.controllers.auth.dto.RegisterUserResponse;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.example.sportsuser.utils.Models.*;

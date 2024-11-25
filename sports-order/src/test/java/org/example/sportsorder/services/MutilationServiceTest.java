@@ -1,5 +1,6 @@
 package org.example.sportsorder.services;
 
+import org.example.sportsorder.exceptions.ErrorCode;
 import org.example.sportsorder.exceptions.InternalException;
 import org.example.sportsorder.models.Mutilation;
 import org.example.sportsorder.repositories.MutilationRepository;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -69,5 +71,19 @@ class MutilationServiceTest {
 
         assertEquals(1, mutilations.size());
         assertEquals(testMutilation.getId(), mutilations.get(0).getId());
+    }
+
+    @Test
+    void testFindAllMutilationsById_throwsException() {
+        List<UUID> mutilationIds = List.of(MUTILATION.getId(), UUID.randomUUID());
+        when(mutilationRepository.findAllByIdIn(mutilationIds)).thenReturn(List.of(MUTILATION));
+
+        InternalException exception = assertThrows(InternalException.class, () -> {
+            mutilationService.findAllMutilationsById(mutilationIds);
+        });
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+        assertEquals(ErrorCode.MUTILATION_NOT_FOUND, exception.getErrorCode());
+
     }
 }

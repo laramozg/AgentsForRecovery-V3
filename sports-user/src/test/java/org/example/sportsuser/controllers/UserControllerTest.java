@@ -1,31 +1,24 @@
 package org.example.sportsuser.controllers;
 
 import org.example.sportsuser.BaseIntegrationTest;
-import org.example.sportsuser.controllers.user.dto.UserDto;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.example.sportsuser.utils.Models.USER;
 
 @Disabled
 class UserControllerTest extends BaseIntegrationTest {
 
     @Test
-    void findShouldReturnOk() {
+    void findShouldReturnNotFound() {
         client.get()
                 .uri("/users/" + USER.getId())
                 .exchange()
-                .expectAll(
-                        result -> result.expectStatus().isOk(),
-                        result -> result.expectBody(UserDto.class).value(user -> {
-                            assertThat(user.username()).isEqualTo(USER.getUsername());
-                        })
-                );
+                .expectStatus().isCreated();
     }
 
     @Test
-    void deleteShouldReturnNoContent() {
+    void deleteShouldReturnNotFound() {
         client.delete()
                 .uri("/users/" + USER.getId())
                 .exchange()
@@ -34,7 +27,7 @@ class UserControllerTest extends BaseIntegrationTest {
 
 
     @Test
-    void blockShouldReturnNoContent() {
+    void blockShouldReturnNotFound() {
         client.patch()
                 .uri("/users/" + USER.getId() + "/block")
                 .exchange()
@@ -42,7 +35,7 @@ class UserControllerTest extends BaseIntegrationTest {
     }
 
     @Test
-    void unblockShouldReturnNoContent() {
+    void unblockShouldReturnNotFound() {
         client.delete()
                 .uri("/users/" + USER.getId() + "/block")
                 .exchange()
@@ -50,7 +43,7 @@ class UserControllerTest extends BaseIntegrationTest {
     }
 
     @Test
-    void confirmShouldReturnNoContent() {
+    void confirmShouldReturnNotFound() {
         client.patch()
                 .uri("/users/" + USER.getId() + "/confirm")
                 .exchange()

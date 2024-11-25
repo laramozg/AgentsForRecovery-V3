@@ -21,7 +21,7 @@ public abstract class BaseIntegrationTest extends PostgresAutoConfiguration {
     protected WebTestClient client;
 
     @Autowired
-    private UserRepository userRepository;
+    protected UserRepository userRepository;
 
     @BeforeEach
     public void setUp(ApplicationContext context) {

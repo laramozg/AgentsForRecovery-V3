@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+  cloud:
+    config:
+      enabled: false
+    openfeign:
+      sports-order:
+        name: ${SPORTS_ORDER_NAME:sports-order}
+
+eureka:
+  client:
+    enabled: false

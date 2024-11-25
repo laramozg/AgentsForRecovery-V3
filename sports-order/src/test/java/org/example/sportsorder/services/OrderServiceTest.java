@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.example.sportsorder.utils.Models.MUTILATION;
 import static org.example.sportsorder.utils.Models.ORDER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,6 +29,9 @@ class OrderServiceTest {
 
     @Mock
     private OrderRepository orderRepository;
+
+    @Mock
+    private MutilationService mutilationService;
 
     @InjectMocks
     private OrderService orderService;
@@ -42,9 +46,11 @@ class OrderServiceTest {
 
     @Test
     void shouldCreateOrder() {
+        when(mutilationService.findAllMutilationsById(List.of(MUTILATION.getId())))
+                .thenReturn(List.of(MUTILATION));
         when(orderRepository.save(any(Order.class))).thenReturn(testOrder);
 
-        UUID createdId = orderService.createOrder(testOrder,null);
+        UUID createdId = orderService.createOrder(testOrder, List.of(MUTILATION.getId()));
 
         assertEquals(testOrder.getId(), createdId);
     }
