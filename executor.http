@@ -29,11 +29,11 @@ Content-Type: application/json
 
 POST http://localhost:8080/api/v2/performers
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6IjdiMWY1YzdlLTM0ZjYtNGE0Mi04Mjc3LTY2MWE3YTFiOWVlNiIsInJvbGVzIjpbIkVYRUNVVE9SIl0sImV4cCI6MTczMjU1MDY2NX0._es6Of1ULg0GllD2DPXXoZ6UJyWzC6Wg_mnbtpPTrL6HbwaVBv9If8b133QrgdUPKCg9Xl5oMLEdll-G4rG0sQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6IjcxNzVkYmE0LWFiODgtNDBlMy04YjUxLTdiNWFiOTJmMTYwNCIsInJvbGVzIjpbIkVYRUNVVE9SIl0sImV4cCI6MTczMjYwOTUyMH0.HZhh0Z_aCIEZFUT43eXfVoYWqFd4BTLZKU0jxSBmrpYsZGYK5Y_ChW4jhcBU4QvsXk4tIaIvyx0kxqH3Wf6lzQ
 
 
 {
-  "passportSeriesNumber": "11111",
+  "passport_series_number": "11111",
   "weight": 100.00,
   "height": 180.0
 }
@@ -42,12 +42,12 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6IjdiM
 
 POST http://localhost:8080/api/v2/fights
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6IjdiMWY1YzdlLTM0ZjYtNGE0Mi04Mjc3LTY2MWE3YTFiOWVlNiIsInJvbGVzIjpbIkVYRUNVVE9SIl0sImV4cCI6MTczMjU1MDY2NX0._es6Of1ULg0GllD2DPXXoZ6UJyWzC6Wg_mnbtpPTrL6HbwaVBv9If8b133QrgdUPKCg9Xl5oMLEdll-G4rG0sQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleGVjdXRvcjIiLCJpZCI6IjcxNzVkYmE0LWFiODgtNDBlMy04YjUxLTdiNWFiOTJmMTYwNCIsInJvbGVzIjpbIkVYRUNVVE9SIl0sImV4cCI6MTczMjYwOTUyMH0.HZhh0Z_aCIEZFUT43eXfVoYWqFd4BTLZKU0jxSBmrpYsZGYK5Y_ChW4jhcBU4QvsXk4tIaIvyx0kxqH3Wf6lzQ
 
 
 {
-  "performerId": "b611357e-f1d0-4561-8146-806ff0a7ebc1",
-  "orderId": "acdf6448-9682-498e-a58e-b37d451826d5"
+  "performer_id": "2b691f6c-fb86-445b-ae8b-fe00a12893f3",
+  "order_id": "595694e2-5e33-4849-862f-2eb6d77ee1df"
 }
 
 ###

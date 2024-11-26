@@ -6,6 +6,9 @@ info:
     name: D2 team
 
 spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
   application:
     name: sports-fight
   profiles:

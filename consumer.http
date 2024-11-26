@@ -42,30 +42,30 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjgyM
 ###
 
 GET http://localhost:8080/api/v2/cities
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImI0MDFlOWNjLTMwZTItNGRjOC1hNTE5LWE3ZjAyOWQzNjQ2MSIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjU1MDU0OH0.8TN_UucFmOobVn7_ZjMG9lv95xWByTcbdNxIgIWZ17wR5xkRBQY599dxBzgissDhwCdFDUBk4EBJnpUk_p8EqA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjQ4OTAwZjk5LWM1ZWUtNGFmMC04MGNkLWE2MDgxMjBkMjE4YiIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjYwOTM5Nn0.tFj2h5f8KlnsjenzTw-wjNFpzuccjUgMehfXBK_FeGxyGk0n62Yi1KnC7izgRFwWP4Q1-F4-yr8ppLEr6HrnMg
 
 ###
 
 GET http://localhost:8080/api/v2/mutilations
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImI0MDFlOWNjLTMwZTItNGRjOC1hNTE5LWE3ZjAyOWQzNjQ2MSIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjU1MDU0OH0.8TN_UucFmOobVn7_ZjMG9lv95xWByTcbdNxIgIWZ17wR5xkRBQY599dxBzgissDhwCdFDUBk4EBJnpUk_p8EqA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjQ4OTAwZjk5LWM1ZWUtNGFmMC04MGNkLWE2MDgxMjBkMjE4YiIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjYwOTM5Nn0.tFj2h5f8KlnsjenzTw-wjNFpzuccjUgMehfXBK_FeGxyGk0n62Yi1KnC7izgRFwWP4Q1-F4-yr8ppLEr6HrnMg
 
 ###
 
 
 GET http://localhost:8080/api/v2/victims
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImI0MDFlOWNjLTMwZTItNGRjOC1hNTE5LWE3ZjAyOWQzNjQ2MSIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjU1MDU0OH0.8TN_UucFmOobVn7_ZjMG9lv95xWByTcbdNxIgIWZ17wR5xkRBQY599dxBzgissDhwCdFDUBk4EBJnpUk_p8EqA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjQ4OTAwZjk5LWM1ZWUtNGFmMC04MGNkLWE2MDgxMjBkMjE4YiIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjYwOTM5Nn0.tFj2h5f8KlnsjenzTw-wjNFpzuccjUgMehfXBK_FeGxyGk0n62Yi1KnC7izgRFwWP4Q1-F4-yr8ppLEr6HrnMg
 
 ###
 POST http://localhost:8080/api/v2/orders
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImI0MDFlOWNjLTMwZTItNGRjOC1hNTE5LWE3ZjAyOWQzNjQ2MSIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjU1MDU0OH0.8TN_UucFmOobVn7_ZjMG9lv95xWByTcbdNxIgIWZ17wR5xkRBQY599dxBzgissDhwCdFDUBk4EBJnpUk_p8EqA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjQ4OTAwZjk5LWM1ZWUtNGFmMC04MGNkLWE2MDgxMjBkMjE4YiIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjYwOTM5Nn0.tFj2h5f8KlnsjenzTw-wjNFpzuccjUgMehfXBK_FeGxyGk0n62Yi1KnC7izgRFwWP4Q1-F4-yr8ppLEr6HrnMg
 
 
 {
-  "cityId": "d4300397-ec4b-499d-8ebe-fa7b6cc26683",
-  "victimId": "877bbfad-eb31-427a-891b-103ff674f12d",
+  "city_id": "7dde3c54-01a3-44fb-91b6-90efd6c62160",
+  "victim_id": "c48a8cb2-d733-45b9-a095-3dd6c7f1db04",
   "deadline": "2024-12-01",
-  "mutilationIds": ["52b9df28-92d3-4481-b7f0-193f31aa037a"]
+  "mutilation_ids": ["784c3dd4-66df-4227-93b5-524c2a524c9d"]
 }
 
 ###
