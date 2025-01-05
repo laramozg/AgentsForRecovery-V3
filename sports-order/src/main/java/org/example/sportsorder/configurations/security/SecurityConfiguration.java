@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                         .requestMatchers(
                                 "/actuator/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**"
+                                "sports-order/v3/api-docs/**"
                         ).permitAll()
                         .requestMatchers("/**").authenticated()
                 )

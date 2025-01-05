@@ -32,7 +32,8 @@ public class RouteConfiguration {
                         .uri("lb://" + props.getSportsUser())
                 )
                 .route(props.getSportsUser() + "-route-users", r -> r
-                        .path(apiPrefix + "/users/**")
+                        .path(apiPrefix + "/users/**",
+                                apiPrefix + "/" + props.getSportsUser() + "/**")
                         .filters(f -> f
                                 .stripPrefix(2)
                                 .circuitBreaker(c -> c
@@ -47,7 +48,8 @@ public class RouteConfiguration {
                         .path(apiPrefix + "/cities/**",
                                 apiPrefix + "/victims/**",
                                 apiPrefix + "/orders/**",
-                                apiPrefix + "/mutilations/**")
+                                apiPrefix + "/mutilations/**",
+                                apiPrefix + "/" + props.getSportsOrder() + "/**")
                         .filters(f -> f
                                 .stripPrefix(2)
                                 .circuitBreaker(cb -> cb
@@ -60,7 +62,8 @@ public class RouteConfiguration {
                 )
                 .route(props.getSportsFight() + "-route", r -> r
                         .path(apiPrefix + "/performers/**",
-                                apiPrefix + "/fights/**")
+                                apiPrefix + "/fights/**",
+                                apiPrefix + "/" + props.getSportsFight() + "/**")
                         .filters(f -> f
                                 .stripPrefix(2)
                                 .circuitBreaker(cb -> cb
@@ -70,6 +73,19 @@ public class RouteConfiguration {
                                 .filter(authFilter.apply(new AuthenticationFilter.Config()))
                         )
                         .uri("lb://" + props.getSportsFight())
+                )
+                .route(props.getSportsFile() + "-route", r -> r
+                        .path(apiPrefix + "/files/**",
+                                apiPrefix + "/" + props.getSportsFile() + "/**")
+                        .filters(f -> f
+                                .stripPrefix(2)
+                                .circuitBreaker(cb -> cb
+                                        .setName(props.getSportsFile() + "-circuit-breaker")
+                                        .setFallbackUri(URI.create("forward:/fallback"))
+                                )
+                                .filter(authFilter.apply(new AuthenticationFilter.Config()))
+                        )
+                        .uri("lb://" + props.getSportsFile())
                 )
                 .build();
     }

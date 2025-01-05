@@ -28,9 +28,7 @@ spring:
 springdoc:
   api-docs:
     enabled: true
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui/index.html
+    path: /sports-order/v3/api-docs
 
 
 server:

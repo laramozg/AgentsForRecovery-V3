@@ -1,8 +1,15 @@
 package org.example.sportsorder.controllers.city.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.UUID;
 
-public record CityDto(UUID id,
-                      String name,
-                      String region) {
+@Schema(description = "Город")
+public record CityDto(
+        @Schema(description = "ID города")
+        UUID id,
+        @Schema(description = "Название")
+        String name,
+        @Schema(description = "Регион")
+        String region) {
 }

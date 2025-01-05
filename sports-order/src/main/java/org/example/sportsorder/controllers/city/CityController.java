@@ -1,6 +1,10 @@
 package org.example.sportsorder.controllers.city;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsorder.controllers.city.dto.CityDto;
@@ -28,6 +32,13 @@ public class CityController {
     private final CityMapper cityMapper;
     private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 
+    @Operation(summary = "Создание города")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Город создан", content = @Content(schema = @Schema(implementation = CityResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR', 'CUSTOMER')")
@@ -36,6 +47,14 @@ public class CityController {
         return new CityResponse(cityService.createCity(cityMapper.convertToEntity(cityRequest)));
     }
 
+    @Operation(summary = "Обновление города")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Город создан", content = @Content(schema = @Schema(implementation = CityDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "404", description = "Не найдено", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
@@ -45,6 +64,13 @@ public class CityController {
         return cityMapper.convertToDto(cityService.updateCity(id, cityMapper.convertToEntity(cityRequest)));
     }
 
+    @Operation(summary = "Удаление города")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Город удален", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
@@ -53,6 +79,13 @@ public class CityController {
         cityService.deleteCity(id);
     }
 
+    @Operation(summary = "Поиск городов")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Города найдены", content = @Content(schema = @Schema(implementation = CityDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<CityDto> findAllCities(

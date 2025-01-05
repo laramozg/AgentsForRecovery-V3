@@ -33,7 +33,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         String userRolesHeader = request.getHeader(USER_ROLES);
 
         if (userId != null && username != null && userRolesHeader != null && !userRolesHeader.isEmpty()) {
-            logger.info(userRolesHeader);
             List<String> userRoles = objectMapper.readValue(userRolesHeader, new TypeReference<List<String>>() {});
 
             List<SimpleGrantedAuthority> authorities = userRoles.stream()

@@ -32,7 +32,11 @@ public class SecurityConfiguration {
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .anonymous(ServerHttpSecurity.AnonymousSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/actuator/**", "/webjars/**", "/v3/api-docs/**").permitAll()
+                        .pathMatchers(
+                                "/actuator/**",
+                                "/webjars/**",
+                                "sports-fight/v3/api-docs/**")
+                        .permitAll()
                         .pathMatchers("/**").authenticated())
                 .addFilterBefore(authenticationFilter, SecurityWebFiltersOrder.AUTHORIZATION)
                 .exceptionHandling(exceptionHandling -> {

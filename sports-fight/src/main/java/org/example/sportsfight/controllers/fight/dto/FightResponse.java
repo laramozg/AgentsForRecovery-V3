@@ -1,6 +1,11 @@
 package org.example.sportsfight.controllers.fight.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.UUID;
 
-public record FightResponse(UUID id) {
+@Schema
+public record FightResponse(
+        @Schema(description = "ID")
+        UUID id) {
 }

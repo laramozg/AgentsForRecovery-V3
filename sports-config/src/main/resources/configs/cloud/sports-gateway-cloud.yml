@@ -4,6 +4,7 @@ spring:
       sports-user: ${SPORTS_USER_NAME:sports-user}
       sports-order: ${SPORTS_ORDER_NAME:sports-order}
       sports-fight: ${SPORTS_PROCESS_NAME:sports-fight}
+      sports-file: ${SPORTS_FILE_NAME:sports-file}
 
 resilience4j:
   circuitbreaker:
@@ -35,6 +36,32 @@ resilience4j:
         waitDurationInOpenState: 2s
         automaticTransitionFromOpenToHalfOpenEnabled: true
         permittedNumberOfCallsInHalfOpenState: 5
+      sports-file-circuit-breaker:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 2s
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        permittedNumberOfCallsInHalfOpenState: 5
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: sports-gateway
+      - url: /api/v3/sports-user/v3/api-docs
+        name: sports-user
+      - url: /api/v3/sports-order/v3/api-docs
+        name: sports-order
+      - url: /api/v3/sports-fight/v3/api-docs
+        name: sports-fight
+      - url: /api/v3/sports-file/v3/api-docs
+        name: sports-file
+
 
 management:
   endpoints:

@@ -1,9 +1,12 @@
 package org.example.sportsorder.controllers.victim;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.sportsorder.controllers.order.OrderController;
 import org.example.sportsorder.controllers.victim.dto.VictimDto;
 import org.example.sportsorder.controllers.victim.dto.VictimRequest;
 import org.example.sportsorder.controllers.victim.dto.VictimResponse;
@@ -29,6 +32,13 @@ public class VictimController {
     private final VictimMapper victimMapper;
     private static final Logger logger = LoggerFactory.getLogger(VictimController.class);
 
+    @Operation(summary = "Создание жертвы")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Жертва создана", content = @Content(schema = @Schema(implementation = VictimResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('CUSTOMER')")
@@ -38,13 +48,28 @@ public class VictimController {
         return new VictimResponse(victimService.createVictim(victimMapper.convertToEntity(request)));
     }
 
+    @Operation(summary = "Поиск жертвы")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Жертва найдена", content = @Content(schema = @Schema(implementation = VictimDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "404", description = "Не найдено", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public VictimDto fintVictim(@PathVariable UUID id) {
+    public VictimDto findVictim(@PathVariable UUID id) {
         logger.trace("Get Victim by id request: {}", id);
         return victimMapper.convertToDto(victimService.find(id));
     }
 
+    @Operation(summary = "Поиск жертв")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Жертвы найдены", content = @Content(schema = @Schema(implementation = VictimDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<VictimDto> findAllVictims(
@@ -54,6 +79,13 @@ public class VictimController {
         return victimService.findAllVictims(pageable).map(victimMapper::convertToDto);
     }
 
+    @Operation(summary = "Удаление жертвы")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Жертва удалена", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteVictim(@PathVariable UUID id) {

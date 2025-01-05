@@ -1,6 +1,10 @@
 package org.example.sportsfight.controllers.fight;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsfight.controllers.fight.dto.FightDto;
@@ -30,6 +34,13 @@ public class FightController {
     private final FightMapper fightMapper;
     public static final int DEFAULT_PAGE_SIZE = 50;
 
+    @Operation(summary = "Создание боя")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Бой создан", content = @Content(schema = @Schema(implementation = FightResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('EXECUTOR')")
@@ -42,6 +53,13 @@ public class FightController {
 
     }
 
+    @Operation(summary = "Поиск боя")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Бой найден", content = @Content(schema = @Schema(implementation = FightDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Mono<Page<FightDto>> findFightsByPerformerId(
@@ -52,6 +70,13 @@ public class FightController {
         return fightService.findPage(pageable, id).map(page -> page.map(fightMapper::convertToDto));
     }
 
+    @Operation(summary = "Обновление боя")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Бой обновлен", content = @Content(schema = @Schema(implementation = FightDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PutMapping("/{id}/status")
     @ResponseStatus(HttpStatus.OK)
     public Mono<FightDto> updateFightStatus(@PathVariable UUID id,

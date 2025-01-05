@@ -1,0 +1,26 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  cloud:
+    config:
+      enabled: false
+
+  s3:
+    endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+    access-key: ${MINIO_ACCESS_KEY:username}
+    secret-key: ${MINIO_SECRET_KEY:password}
+    bucket: ${MINIO_BUCKET:sports}
+    region: ${MINIO_REGION:us-east-1}
+
+eureka:
+  client:
+    enabled: false
+
+management:
+  endpoints:
+    web.exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always

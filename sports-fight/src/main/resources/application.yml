@@ -28,6 +28,7 @@ spring:
 springdoc:
   api-docs:
     enabled: true
+    path: /sports-fight/v3/api-docs
 
 server:
   port: ${PORT:8387}

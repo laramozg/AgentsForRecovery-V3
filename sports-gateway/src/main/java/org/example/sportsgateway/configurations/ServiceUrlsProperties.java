@@ -11,11 +11,13 @@ public class ServiceUrlsProperties {
     private final String sportsUser;
     private final String sportsOrder;
     private final String sportsFight;
+    private final String sportsFile;
 
-    public ServiceUrlsProperties(String sportsUser, String sportsOrder, String sportsFight) {
+    public ServiceUrlsProperties(String sportsUser, String sportsOrder, String sportsFight, String sportsFile) {
         this.sportsUser = sportsUser;
         this.sportsOrder = sportsOrder;
         this.sportsFight = sportsFight;
+        this.sportsFile = sportsFile;
     }
 
 }

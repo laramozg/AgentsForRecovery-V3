@@ -14,6 +14,20 @@ services:
       - cloud
       - local
 
+  sports-minio:
+    container_name: sports-minio
+    image: bitnami/minio:2024
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: username
+      MINIO_ROOT_PASSWORD: password
+      MINIO_DEFAULT_BUCKETS: sports-file
+    profiles:
+      - cloud
+      - local
+
   sports-discovery:
     container_name: sports-discovery
     image: sports-discovery
@@ -64,6 +78,12 @@ services:
       SPORTS_FIGHT_DB_USER: username
       SPORTS_FIGHT_DB_PASSWORD: password
       SPORTS_ORDER_URL: sports_order
+      # sports-file
+      MINIO_ENDPOINT: http://sports-minio:9000
+      MINIO_ACCESS_KEY: username
+      MINIO_SECRET_KEY: password
+      MINIO_BUCKET: sports-file
+      MINIO_REGION: us-east-1
 
     depends_on:
       - sports-discovery
@@ -99,7 +119,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: cloud
       DISCOVERY_SERVER_URL: http://eureka_client:eureka_password@sports-discovery:8761/eureka
-      API_PREFIX: /api/v2
+      API_PREFIX: /api/v3
       PORT: 8080
     depends_on:
       - sports-discovery
@@ -164,5 +184,25 @@ services:
       - sports-discovery
       - sports-config
       - sports-gateway
+    profiles:
+      - cloud
+
+  sports-file:
+    container_name: sports-file
+    image: sports-file
+    ports:
+      - "8389:8389"
+    build:
+      context: "sports-file"
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: cloud
+      DISCOVERY_SERVER_URL: http://eureka_client:eureka_password@afa-discovery:8761/eureka
+      PORT: 8389
+    depends_on:
+      - afa-minio
+      - afa-discovery
+      - afa-config
+      - afa-gateway
     profiles:
       - cloud

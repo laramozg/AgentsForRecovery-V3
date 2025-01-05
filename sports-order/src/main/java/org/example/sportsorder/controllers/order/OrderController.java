@@ -1,8 +1,13 @@
 package org.example.sportsorder.controllers.order;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.sportsorder.controllers.mutilation.dto.MutilationResponse;
 import org.example.sportsorder.controllers.order.dto.OrderDto;
 import org.example.sportsorder.controllers.order.dto.OrderRequest;
 import org.example.sportsorder.controllers.order.dto.OrderResponse;
@@ -29,6 +34,14 @@ public class OrderController {
     private final OrderMapper orderMapper;
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
+    @Operation(summary = "Создание заказа")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Заказ создан", content = @Content(schema = @Schema(implementation = OrderResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "404", description = "Не найдено", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('CUSTOMER')")
@@ -38,7 +51,13 @@ public class OrderController {
         return new OrderResponse(order);
     }
 
-
+    @Operation(summary = "Поиск заказов по статусу")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Заказы найдены", content = @Content(schema = @Schema(implementation = OrderDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<OrderDto> findOrdersWithStatusWait(
@@ -48,6 +67,13 @@ public class OrderController {
         return orderService.findOrdersWithStatusWait(pageable).map(orderMapper::convertToDto);
     }
 
+    @Operation(summary = "Поиск заказов по пользователю")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Заказы найдены", content = @Content(schema = @Schema(implementation = OrderDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @GetMapping("/user")
     @ResponseStatus(HttpStatus.OK)
     public Page<OrderDto> findOrdersByUsername(
@@ -57,7 +83,13 @@ public class OrderController {
         return orderService.findOrdersByUsername(pageable).map(orderMapper::convertToDto);
     }
 
-
+    @Operation(summary = "Удаление заказа")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Заказ удален", content = @Content(schema = @Schema)),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR', 'CUSTOMER')")
@@ -66,6 +98,14 @@ public class OrderController {
         orderService.deleteOrder(id);
     }
 
+    @Operation(summary = "Обновление статуса заказа")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Статус заказ обновлен", content = @Content(schema = @Schema(implementation = OrderUpdateResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "404", description = "Не найдено", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PostMapping("/{id}/{status}")
     @ResponseStatus(HttpStatus.OK)
     public OrderUpdateResponse updateStatus(@PathVariable UUID id, @PathVariable String status){

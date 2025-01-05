@@ -1,15 +1,25 @@
 package org.example.sportsorder.controllers.victim.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.UUID;
 
-public record VictimDto(UUID uuid,
-                        String firstName,
-                        String lastName,
-                        String workplace,
-                        String position,
-                        String residence,
-                        String phone,
-                        String description) {
+@Schema(description = "Жертва")
+public record VictimDto(
+        @Schema(description = "ID")
+        UUID uuid,
+        @Schema(description = "Имя")
+        String firstName,
+        @Schema(description = "Фамилия")
+        String lastName,
+        @Schema(description = "Место работы")
+        String workplace,
+        @Schema(description = "Должность")
+        String position,
+        @Schema(description = "Место жительства")
+        String residence,
+        @Schema(description = "Телефон")
+        String phone,
+        @Schema(description = "Описание")
+        String description) {
 }

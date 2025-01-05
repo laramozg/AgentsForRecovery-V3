@@ -1,6 +1,11 @@
 package org.example.sportsorder.controllers.mutilation.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.UUID;
 
-public record MutilationResponse(UUID id) {
+@Schema
+public record MutilationResponse(
+        @Schema(description = "ID")
+        UUID id) {
 }

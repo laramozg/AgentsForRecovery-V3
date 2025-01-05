@@ -1,12 +1,17 @@
 package org.example.sportsuser.exceptions;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.ResponseEntity;
 
 import java.util.UUID;
 
+@Schema(description = "Класс ошибки")
 public class Error {
+    @Schema(description = "Id ошибки")
     private final String errorId = UUID.randomUUID().toString();
+    @Schema(description = "Статус код")
     private final int status;
+    @Schema(description = "Причина")
     private final ErrorCode code;
 
     public Error(int status, ErrorCode code) {

@@ -25,9 +25,7 @@ spring:
 springdoc:
   api-docs:
     enabled: true
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui/index.html
+    path: /sports-user/v3/api-docs
 
 server:
   port: ${PORT:8383}

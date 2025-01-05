@@ -1,6 +1,10 @@
 package org.example.sportsorder.controllers.mutilation;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsorder.controllers.mutilation.dto.MutilationDto;
@@ -29,7 +33,13 @@ public class MutilationController {
     private final MutilationMapper mutilationMapper;
     private static final Logger logger = LoggerFactory.getLogger(MutilationController.class);
 
-
+    @Operation(summary = "Создание ущерба")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Ущерб создан", content = @Content(schema = @Schema(implementation = MutilationResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR', 'CUSTOMER')")
@@ -40,6 +50,13 @@ public class MutilationController {
         return new MutilationResponse(mutilation);
     }
 
+    @Operation(summary = "Поиск городов")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Города найдены", content = @Content(schema = @Schema(implementation = MutilationDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<MutilationDto> findAllMutilations(
@@ -50,6 +67,14 @@ public class MutilationController {
                 .map(mutilationMapper::convertToDto);
     }
 
+    @Operation(summary = "Поиск ущерба")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ущерб найден", content = @Content(schema = @Schema(implementation = MutilationDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "404", description = "Не найдено", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public MutilationDto findMutilationById(@PathVariable UUID id) {
@@ -57,6 +82,14 @@ public class MutilationController {
         return mutilationMapper.convertToDto(mutilationService.find(id));
     }
 
+    @Operation(summary = "Обновление ущерба")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ущерб создан", content = @Content(schema = @Schema(implementation = MutilationDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "404", description = "Не найдено", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")
@@ -68,6 +101,13 @@ public class MutilationController {
         return mutilationMapper.convertToDto(mutilation);
     }
 
+    @Operation(summary = "Удаление ущерба")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Ущерб удален", content = @Content(schema = @Schema())),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('SUPERVISOR')")

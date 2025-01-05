@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                                 "/actuator/**",
                                 "/webjars/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**",
+                                "sports-user/v3/api-docs/**",
                                 "/auth/**"
                         ).permitAll()
                         .pathMatchers("/**").authenticated()
