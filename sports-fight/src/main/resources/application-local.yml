@@ -22,12 +22,24 @@ spring:
             loggerLevel: basic
       sports-order:
         name: ${SPORTS_ORDER_NAME:sports-order}
+        url: ${SPORTS_ORDER_URL:localhost:8381}
 
+  kafka:
+    bootstrap-servers: localhost:29092, localhost:29093, localhost:29094
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    topics:
+      notification-email-topic: sports-notification-email-topic
 
 eureka:
   client:
     enabled: false
 
+api:
+  job:
+    scheduler:
+      process-debt: "0 0 0 * * *"
 
 management:
   endpoints:

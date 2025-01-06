@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsorder.controllers.mutilation.dto.MutilationResponse;
+import org.example.sportsorder.controllers.order.dto.OrderDeadlineResponse;
 import org.example.sportsorder.controllers.order.dto.OrderDto;
 import org.example.sportsorder.controllers.order.dto.OrderRequest;
 import org.example.sportsorder.controllers.order.dto.OrderResponse;
@@ -81,6 +82,20 @@ public class OrderController {
     ) {
         logger.trace("Find orders by username");
         return orderService.findOrdersByUsername(pageable).map(orderMapper::convertToDto);
+    }
+
+    @Operation(summary = "Поиск заказов по id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Заказы найдены", content = @Content(schema = @Schema(implementation = OrderDto.class))),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Не доступно", content = @Content(schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "500", description = "Сервис не доступен", content = @Content(schema = @Schema(implementation = Error.class)))
+    })
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderDeadlineResponse findOrdersById(@PathVariable UUID id) {
+        logger.trace("Find orders by id");
+        return orderMapper.convertToDeadline(orderService.find(id));
     }
 
     @Operation(summary = "Удаление заказа")

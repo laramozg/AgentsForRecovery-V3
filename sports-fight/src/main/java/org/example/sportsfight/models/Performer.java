@@ -19,7 +19,10 @@ public class Performer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "username", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "username", nullable = false)
     private String username;
 
     @Column(name = "passport_series_number", nullable = false)

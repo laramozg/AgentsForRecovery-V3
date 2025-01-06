@@ -24,6 +24,15 @@ spring:
         name: ${SPORTS_ORDER_NAME:sports-order}
         url: ${SPORTS_ORDER_URL:sports-order}
 
+  kafka:
+    bootstrap-servers: sports-kafka-broker-1:9092, sports-kafka-broker-2:9093, sports-kafka-broker-3:9094
+    #bootstrap-servers: localhost:29092, localhost:29093, localhost:29094
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    topics:
+      notification-email-topic: sports-notification-email-topic
+
 management:
   endpoints:
     web.exposure.include: "*"
@@ -31,3 +40,7 @@ management:
     health:
       show-details: always
 
+api:
+  job:
+    scheduler:
+      process-debt: "0 0 0 * * *"

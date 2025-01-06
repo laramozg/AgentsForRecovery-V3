@@ -1,0 +1,27 @@
+info:
+  app:
+    name: sports-notification
+    description: Sports service
+  team:
+    name: D2 team
+
+spring:
+  application:
+    name: sports-notification
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  mail:
+    host: smtp.yandex.ru
+    port: 465
+    username: mozgovaya73@yandex.ru
+    password: wnjddfavfatwhpda
+    protocol: smtps
+    debug: true
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /sports-notification/v3/api-docs
+
+server:
+  port: ${PORT:8491}

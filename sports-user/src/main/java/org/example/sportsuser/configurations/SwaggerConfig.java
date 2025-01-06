@@ -15,7 +15,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
-                .addServersItem(Server())
+                .addServersItem(new Server().url("http://localhost:8080/api/v3"))
                 .addSecurityItem(
                         new SecurityRequirement().addList("Bearer Authentication")
                 )

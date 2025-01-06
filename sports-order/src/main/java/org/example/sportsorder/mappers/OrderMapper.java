@@ -2,6 +2,7 @@ package org.example.sportsorder.mappers;
 
 import lombok.AllArgsConstructor;
 import org.example.sportsorder.controllers.mutilation.dto.MutilationDto;
+import org.example.sportsorder.controllers.order.dto.OrderDeadlineResponse;
 import org.example.sportsorder.controllers.order.dto.OrderDto;
 import org.example.sportsorder.controllers.order.dto.OrderRequest;
 import org.example.sportsorder.controllers.order.dto.OrderUpdateResponse;
@@ -49,6 +50,10 @@ public class OrderMapper {
 
     public OrderUpdateResponse convert(Order order) {
         return new OrderUpdateResponse(order.getId(), order.getStatus().toString());
+    }
+
+    public OrderDeadlineResponse convertToDeadline(Order order){
+        return new OrderDeadlineResponse(order.getId(), order.getDeadline());
     }
 
     private MutilationDto toMutilationDto(OrderMutilation orderMutilation) {

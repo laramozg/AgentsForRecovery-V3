@@ -15,11 +15,16 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: username
+                  name: email
                   type: varchar(64)
                   constraints:
                     nullable: false
                     unique: true
+              - column:
+                  name: username
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
               - column:
                   name: passport_series_number
                   type: VARCHAR(10)

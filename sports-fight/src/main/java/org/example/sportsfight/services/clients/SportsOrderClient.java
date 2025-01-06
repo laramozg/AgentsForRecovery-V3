@@ -2,6 +2,7 @@ package org.example.sportsfight.services.clients;
 
 import feign.Headers;
 import org.example.sportsfight.configurations.feign.FeignConfiguration;
+import org.example.sportsfight.services.clients.dto.OrderDeadlineDto;
 import org.example.sportsfight.services.clients.dto.OrderDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,4 +18,7 @@ public interface SportsOrderClient {
     @RequestMapping(method = RequestMethod.POST, value = "/orders/{id}/{status}")
     OrderDto updateStatusOrder(@PathVariable("id") UUID id, @PathVariable("status") String status);
 
+    @Headers("Content-Type: application/json")
+    @RequestMapping(method = RequestMethod.GET, value = "/orders/{id}")
+    OrderDeadlineDto getOrderById(@PathVariable("id") UUID id);
 }

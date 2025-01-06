@@ -52,7 +52,6 @@ dependencies {
     // open api
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.6.0'
 
-
     testImplementation 'org.testcontainers:r2dbc'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.testcontainers:junit-jupiter'
