@@ -8,9 +8,4 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 class SportsConfigApplicationTests {
 
-    @Test
-    void contextLoads() {
-        assert(true);
-    }
-
 }

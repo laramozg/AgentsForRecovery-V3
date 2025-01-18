@@ -54,8 +54,8 @@ jobs:
           cd ../sports-gateway && ./gradlew build -x test --no-daemon
           cd ../sports-notification && ./gradlew build -x test --no-daemon
           cd ../sports-order && ./gradlew build -x test --no-daemon
-          cd ../sports-fight && ./gradlew build -x test -x --no-daemon
-          cd ../sports-user && ./gradlew build -x test -x --no-daemon
+          cd ../sports-fight && ./gradlew build -x test --no-daemon
+          cd ../sports-user && ./gradlew build -x test --no-daemon
 
   test:
     runs-on: ubuntu-22.04
