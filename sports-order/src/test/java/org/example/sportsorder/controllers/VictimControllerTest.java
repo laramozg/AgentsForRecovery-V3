@@ -5,7 +5,6 @@ import org.example.sportsorder.BaseIntegrationTest;
 import org.example.sportsorder.controllers.victim.dto.VictimRequest;
 import org.example.sportsorder.models.Victim;
 import org.example.sportsorder.repositories.VictimRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,15 +21,9 @@ class VictimControllerTest extends BaseIntegrationTest {
 
     private Victim victim;
 
-    @BeforeEach
-    void setUp() {
-        victim = victimRepository.save(VICTIM);
-    }
-
     @Test
     void createCityShouldReturnCreated() throws Exception {
         VictimRequest victimRequest = VICTIMREQUEST;
-
         mockMvc.perform(post("/victims")
                         .contentType(APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(victimRequest)))
@@ -40,22 +33,24 @@ class VictimControllerTest extends BaseIntegrationTest {
 
     @Test
     void findCityByIdShouldReturnResult() throws Exception {
+        victim = victimRepository.save(VICTIM);
         mockMvc.perform(get("/victims/" + victim.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value(victim.getFirstName()));
+                .andExpect(jsonPath("$.firstname").value(victim.getFirstName()));
     }
 
     @Test
     void deleteCityShouldReturnNoContent() throws Exception {
+        victim = victimRepository.save(VICTIM);
         mockMvc.perform(delete("/victims/" + victim.getId()))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     void findAllCitiesShouldReturnPagedResults() throws Exception {
-
+        victim = victimRepository.save(VICTIM);
         mockMvc.perform(get("/victims?page=0&size=1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].firstName").value(victim.getFirstName()));
+                .andExpect(jsonPath("$.content[0].firstname").value(victim.getFirstName()));
     }
 }

@@ -81,6 +81,6 @@ class FileControllerTest extends BaseIntegrationTest {
                 .getResponse()
                 .getContentAsString();
 
-        return new ObjectMapper().readValue(responseContent, UploadFileResponse.class);
+        return new ObjectMapper().findAndRegisterModules().readValue(responseContent, UploadFileResponse.class);
     }
 }

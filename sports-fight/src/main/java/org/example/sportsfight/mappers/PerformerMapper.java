@@ -19,6 +19,7 @@ public class PerformerMapper {
         return ReactiveSecurityContext.getUsername()
                 .map(username -> Performer.builder()
                         .username(username)
+                        .email(performerRequest.email())
                         .passportSeriesNumber(performerRequest.passportSeriesNumber())
                         .weight(performerRequest.weight())
                         .height(performerRequest.height())

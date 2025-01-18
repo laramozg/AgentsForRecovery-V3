@@ -64,7 +64,7 @@ class OrderControllerTest extends BaseIntegrationTest {
     void createOrderShouldReturnCreated() throws Exception {
         OrderRequest orderRequest = new OrderRequest(city.getId(),victim.getId(),
                 LocalDate.now(), List.of(mutilation.getId()));
-
+        System.out.println(mapper.writeValueAsString(orderRequest));
         mockMvc.perform(post("/orders")
                         .contentType(APPLICATION_JSON)
                         .content(mapper.writeValueAsString(orderRequest)))

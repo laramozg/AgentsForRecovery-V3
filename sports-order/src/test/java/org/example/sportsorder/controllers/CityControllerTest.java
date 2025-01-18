@@ -5,10 +5,7 @@ import org.example.sportsorder.BaseIntegrationTest;
 import org.example.sportsorder.controllers.city.dto.CityRequest;
 import org.example.sportsorder.models.City;
 import org.example.sportsorder.repositories.CityRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.example.sportsorder.utils.Models.CITY;
@@ -24,12 +21,6 @@ class CityControllerTest extends BaseIntegrationTest {
 
     private City city;
 
-    @BeforeEach
-    void setUp() {
-        city = cityRepository.save(CITY);
-    }
-
-
     @Test
     void createCityShouldReturnCreated() throws Exception {
         CityRequest cityRequest = CITYREQUEST;
@@ -43,6 +34,7 @@ class CityControllerTest extends BaseIntegrationTest {
 
     @Test
     void updateCityShouldReturnUpdated() throws Exception {
+        city = cityRepository.save(CITY);
         CityRequest updateRequest = CITYREQUEST;
 
         mockMvc.perform(put("/cities/" + city.getId())
@@ -54,13 +46,14 @@ class CityControllerTest extends BaseIntegrationTest {
 
     @Test
     void deleteCityShouldReturnNoContent() throws Exception {
+        city = cityRepository.save(CITY);
         mockMvc.perform(delete("/cities/" + city.getId()))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     void findAllCitiesShouldReturnPagedResults() throws Exception {
-
+        city = cityRepository.save(CITY);
         mockMvc.perform(get("/cities?page=0&size=1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].name").value(CITY.getName()));

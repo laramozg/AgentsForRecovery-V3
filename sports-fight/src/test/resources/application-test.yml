@@ -12,6 +12,15 @@ spring:
       sports-order:
         name: ${SPORTS_ORDER_NAME:sports-order}
 
+  kafka:
+    topics:
+      notification-email-topic: sports-notification-email-topic
+
 eureka:
   client:
     enabled: false
+
+api:
+  job:
+    scheduler:
+      process-debt: "-"

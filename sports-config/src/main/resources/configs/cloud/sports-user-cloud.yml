@@ -1,14 +1,14 @@
 spring:
 
   r2dbc:
-    url: ${SPORTS_USER_R2DBC_URL:r2dbc:postgresql://localhost:5432/sports_user}
-    #url: ${SPORTS_USER_R2DBC_URL:r2dbc:postgresql://sports-postgres:5432/sports_user}
+#    url: ${SPORTS_USER_R2DBC_URL:r2dbc:postgresql://localhost:5432/sports_user}
+    url: ${SPORTS_USER_R2DBC_URL:r2dbc:postgresql://sports-postgres:5432/sports_user}
     username: ${SPORTS_USER_DB_USER:username}
     password: ${SPORTS_USER_DB_PASSWORD:password}
 
   liquibase:
-    url: ${SPORTS_USER_JDBC_URL:jdbc:postgresql://localhost:5432/sports_user}
-    #url: ${SPORTS_USER_JDBC_URL:jdbc:postgresql://sports-postgres:5432/sports_user}
+#    url: ${SPORTS_USER_JDBC_URL:jdbc:postgresql://localhost:5432/sports_user}
+    url: ${SPORTS_USER_JDBC_URL:jdbc:postgresql://sports-postgres:5432/sports_user}
     user: ${SPORTS_USER_DB_USER:username}
     password: ${SPORTS_USER_DB_PASSWORD:password}
 

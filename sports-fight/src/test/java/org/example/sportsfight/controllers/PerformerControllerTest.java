@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
+import static org.example.sportsfight.utils.Models.EMAIL;
 import static org.example.sportsfight.utils.Models.PERFORMER;
 import static org.example.sportsfight.utils.Models.PERFORMER_REQUEST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -30,7 +31,7 @@ class PerformerControllerTest extends BaseIntegrationTest {
 
     @Test
     void createPerformerShouldReturnCreated() {
-        PerformerRequest performerRequest = new PerformerRequest("11111", 100.0, 199.0);
+        PerformerRequest performerRequest = new PerformerRequest(EMAIL,"11111", 100.0, 199.0);
         client.post()
                 .uri("/performers")
                 .contentType(APPLICATION_JSON)

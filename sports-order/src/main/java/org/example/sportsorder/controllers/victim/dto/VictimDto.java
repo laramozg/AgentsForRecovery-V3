@@ -9,9 +9,9 @@ public record VictimDto(
         @Schema(description = "ID")
         UUID uuid,
         @Schema(description = "Имя")
-        String firstName,
+        String firstname,
         @Schema(description = "Фамилия")
-        String lastName,
+        String lastname,
         @Schema(description = "Место работы")
         String workplace,
         @Schema(description = "Должность")

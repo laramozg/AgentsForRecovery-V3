@@ -23,20 +23,10 @@ class MutilationControllerTest extends BaseIntegrationTest {
 
     private Mutilation mutilation;
 
-    @BeforeEach
-    void setUp() {
-        mutilation = mutilationRepository.save(MUTILATION);
-    }
-
-    @AfterEach
-    void down(){
-        mutilationRepository.deleteAll();
-    }
-
     @Test
     void createMutilationShouldReturnCreated() throws Exception {
         MutilationRequest mutilationRequest = MUTILATIONREQUEST;
-
+        System.out.println(new ObjectMapper().writeValueAsString(mutilationRequest));
         mockMvc.perform(post("/mutilations")
                         .contentType(APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(mutilationRequest)))
@@ -46,6 +36,7 @@ class MutilationControllerTest extends BaseIntegrationTest {
 
     @Test
     void findMutilationByIdShouldReturnResult() throws Exception {
+        mutilation = mutilationRepository.save(MUTILATION);
         mockMvc.perform(get("/mutilations/" + mutilation.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.type").value(mutilation.getType()));
@@ -53,20 +44,22 @@ class MutilationControllerTest extends BaseIntegrationTest {
 
     @Test
     void deleteMutilationShouldReturnNoContent() throws Exception {
+        mutilation = mutilationRepository.save(MUTILATION);
         mockMvc.perform(delete("/mutilations/" + mutilation.getId()))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     void findAllMutilationsShouldReturnPagedResults() throws Exception {
-
-        mockMvc.perform(get("/mutilations?page=0&size=1"))
+        mutilation = mutilationRepository.save(MUTILATION);
+        mockMvc.perform(get("/mutilations?page=0&size=4"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].type").value(mutilation.getType()));
+                .andExpect(jsonPath("$.content[3].type").value(mutilation.getType()));
     }
 
     @Test
     void updateMutilationShouldReturnUpdated() throws Exception {
+        mutilation = mutilationRepository.save(MUTILATION);
         MutilationRequest mutilationRequest = MUTILATIONREQUEST;
 
         mockMvc.perform(put("/mutilations/" + mutilation.getId())

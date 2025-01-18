@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 @Schema(description = "Создание исполнителя")
 public record PerformerRequest (
+        @Schema(description = "Почта")
+        @NotBlank String email,
         @Schema(description = "Серия и номер паспорта")
         @NotBlank String passportSeriesNumber,
         @Schema(description = "Вес")

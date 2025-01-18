@@ -10,8 +10,8 @@ public class VictimMapper {
 
     public Victim convertToEntity(VictimRequest victimRequest){
         return Victim.builder()
-                .firstName(victimRequest.firstName())
-                .lastName(victimRequest.lastName())
+                .firstName(victimRequest.firstname())
+                .lastName(victimRequest.lastname())
                 .workplace(victimRequest.workplace())
                 .position(victimRequest.position())
                 .residence(victimRequest.residence())

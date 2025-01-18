@@ -7,7 +7,7 @@ spring:
     host: smtp.yandex.ru
     port: 465
     username: mozgovaya73@yandex.ru
-    password: wnjddfavfatwhpda
+    password: Larisa2304@
     protocol: smtps
     debug: true
 

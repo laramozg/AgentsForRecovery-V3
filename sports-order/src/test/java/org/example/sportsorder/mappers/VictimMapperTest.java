@@ -17,8 +17,8 @@ class VictimMapperTest {
         VictimRequest request = VICTIMREQUEST;
         Victim victim = victimMapper.convertToEntity(request);
 
-        assertEquals(request.firstName(), victim.getFirstName());
-        assertEquals(request.lastName(), victim.getLastName());
+        assertEquals(request.firstname(), victim.getFirstName());
+        assertEquals(request.lastname(), victim.getLastName());
         assertEquals(request.workplace(), victim.getWorkplace());
     }
 
@@ -28,7 +28,7 @@ class VictimMapperTest {
 
         VictimDto dto = victimMapper.convertToDto(victim);
 
-        assertEquals(victim.getFirstName(), dto.firstName());
-        assertEquals(victim.getLastName(), dto.lastName());
+        assertEquals(victim.getFirstName(), dto.firstname());
+        assertEquals(victim.getLastName(), dto.lastname());
     }
 }

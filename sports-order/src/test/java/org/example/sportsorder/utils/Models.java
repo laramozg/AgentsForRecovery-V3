@@ -49,8 +49,8 @@ public class Models {
             .description("No description").build();
 
     public static VictimRequest VICTIMREQUEST = new VictimRequest(
-            "John", "Doe", "Company", "Manager",
-            "City", "123456789", "No description"
+            "Jame", "Johny", "Company", "Manager",
+            "City", "123456789", "Nodescription"
     );
 
     public static Order ORDER = Order.builder()

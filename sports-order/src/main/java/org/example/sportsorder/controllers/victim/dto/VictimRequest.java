@@ -6,9 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 @Schema(description = "Создание жертвы")
 public record VictimRequest(
         @Schema(description = "Имя")
-        @NotBlank String firstName,
+        @NotBlank String firstname,
         @Schema(description = "Фамилия")
-        @NotBlank String lastName,
+        @NotBlank String lastname,
         @Schema(description = "Место работы")
         String workplace,
         @Schema(description = "Должность")
