@@ -2,6 +2,7 @@ package org.example.sportsnotification.kafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.example.sportsnotification.models.EmailNotification;
 import org.example.sportsnotification.services.EmailSender;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class KafkaNotificationConsumer {
     public void consume(String emailNotification) {
         logger.info("Received email - " + emailNotification);
         try {
-            emailSender.sendEmail(new ObjectMapper().readValue(emailNotification, EmailNotification.class));
+            emailSender.sendEmail(new ObjectMapper().registerModule(new JavaTimeModule()).readValue(emailNotification, EmailNotification.class));
         } catch (JsonProcessingException e) {
             logger.error("Error while sending email - " + emailNotification, e);
         }

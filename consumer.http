@@ -1,5 +1,6 @@
-POST http://localhost:8080/api/v2/auth
+POST http://localhost:8080/api/v3/auth
 Content-Type: application/json
+accept: */*
 
 {
   "username": "customer2",
@@ -8,9 +9,9 @@ Content-Type: application/json
   "telegram": "customer2",
   "role": "CUSTOMER"
 }
-###
+###http://localhost:8080/api/v3/auth/tokens
 
-POST http://localhost:8080/api/v2/auth/tokens
+POST http://localhost:8080/api/v3/auth/tokens
 Content-Type: application/json
 
 {
@@ -18,16 +19,27 @@ Content-Type: application/json
   "password": "customer2"
 }
 
-###
+###eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjRhNTQ3YzU0LWY2OWEtNGU2ZS1iZjZlLWJmYjE3ZDM3ODc1MSIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczNzI0MzI5Mn0.V7dV6ecpQYDr51QPVl4THK8Rck96Xdgh8SjzFZLfasbas8Mn6ip_8I3o5SSIep0d1a4_EdX-Me7k-pi9i8HXyg
 
   "id": "dbc0ce06-c43c-4110-a4b9-4a9cb9e80ac0",
 "username": "customer2",
 "access": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjQ4NDg4NH0.qqXRusZh6H7Nt8iBOVkVOD1UeyvfgsTry_CJ5zYXt8hJR-ePg501rVvgcpkdZ24lMQb2fvcn_c8W3tAZ13q8Uw",
 "refresh": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImRiYzBjZTA2LWM0M2MtNDExMC1hNGI5LTRhOWNiOWU4MGFjMCIsImV4cCI6MTczMjU2NzY4NH0.L41p1Sa7Xdp0Mrs_RBOx9xrNLVZE-3L8py3IFPGJ2dXqw_U858cZEBvKiQIWUfjl20nltO5Q24tAi8tILW_eow"
 }
+fetch('http://localhost:8383/webjars/swagger-ui/index.htm', {
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjRhNTQ3YzU0LWY2OWEtNGU2ZS1iZjZlLWJmYjE3ZDM3ODc1MSIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczNzI0NDA4Mn0.1MW1wTRYattdWzCTHv_fZyDT79nnksaGfGqCxjGAHXf6QfmcQYMHzNdHAmR50w78dv8bK2P1SrfJ3xmBQH5UTg'
+    }
+})
+.then(response => response.text())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
 
 ###
+GET http://localhost:8381/webjars/swagger-ui/index.html
 
+###
 POST http://localhost:8080/api/v2/cities
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjgyMDAxZGFiLTY1MzMtNDBlNS04ZDI3LTEwNTFjY2QyZDhmYSIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjUzMjQzM30.WzpgoycqOevny3aF4qP8d0aEbpKI6Bq5SUC-fmfScbhgAONWH_BUujwLX8kKzxRvEH5opnhlUFYyEQpbvO7Rag
@@ -56,16 +68,15 @@ GET http://localhost:8080/api/v2/victims
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjQ4OTAwZjk5LWM1ZWUtNGFmMC04MGNkLWE2MDgxMjBkMjE4YiIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjYwOTM5Nn0.tFj2h5f8KlnsjenzTw-wjNFpzuccjUgMehfXBK_FeGxyGk0n62Yi1KnC7izgRFwWP4Q1-F4-yr8ppLEr6HrnMg
 
 ###
-POST http://localhost:8080/api/v2/orders
+POST http://localhost:8080/api/v3/orders
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6IjQ4OTAwZjk5LWM1ZWUtNGFmMC04MGNkLWE2MDgxMjBkMjE4YiIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczMjYwOTM5Nn0.tFj2h5f8KlnsjenzTw-wjNFpzuccjUgMehfXBK_FeGxyGk0n62Yi1KnC7izgRFwWP4Q1-F4-yr8ppLEr6HrnMg
-
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcjIiLCJpZCI6ImUxMzM1ZjQxLTQ4NmUtNDgyNC1hNTk5LWQxN2IyYjA1ZGRmNyIsInJvbGVzIjpbIkNVU1RPTUVSIl0sImV4cCI6MTczNzMxMzczOX0.ReegfqD38lL3pgMCJoGE9eUJG4ejclKQ6MVvjvJl5niIu4XVchYwdoZjg4eLt-Q43EKachRczEX5iNrf2PW_Kg
 
 {
-  "city_id": "7dde3c54-01a3-44fb-91b6-90efd6c62160",
-  "victim_id": "c48a8cb2-d733-45b9-a095-3dd6c7f1db04",
-  "deadline": "2024-12-01",
-  "mutilation_ids": ["784c3dd4-66df-4227-93b5-524c2a524c9d"]
+  "cityId": "1d19e1eb-a9ba-4470-9ce0-11bfb9e0c5d4",
+  "victimId": "76744542-331d-4f1d-a825-ea1e1855d216",
+  "deadline": "2025-01-21",
+  "mutilationIds": ["10a47e34-0e07-411e-bdf4-ab768b77dd0a"]
 }
 
 ###

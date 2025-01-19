@@ -5,6 +5,8 @@ spring:
         show_sql: true
         format_sql: true
 
+  #  jackson:
+  #    property-naming-strategy: SNAKE_CASE
 
   datasource:
 #    url: ${SPORTS_FIGHT_JDBC_URL:jdbc:postgresql://localhost:5432/sports_fight}
@@ -43,4 +45,4 @@ management:
 api:
   job:
     scheduler:
-      process-debt: "0 0 0 * * *"
+      process-debt: "0 */5 * * * *"

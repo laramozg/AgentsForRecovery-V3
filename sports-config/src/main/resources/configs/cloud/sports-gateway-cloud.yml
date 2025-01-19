@@ -3,7 +3,7 @@ spring:
     urls:
       sports-user: ${SPORTS_USER_NAME:sports-user}
       sports-order: ${SPORTS_ORDER_NAME:sports-order}
-      sports-fight: ${SPORTS_PROCESS_NAME:sports-fight}
+      sports-fight: ${SPORTS_FIGHT_NAME:sports-fight}
       sports-file: ${SPORTS_FILE_NAME:sports-file}
 
 resilience4j:

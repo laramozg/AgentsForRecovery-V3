@@ -2,6 +2,7 @@ package org.example.sportsfight.kafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.example.sportsfight.configurations.kafka.properties.KafkaTopicsProperties;
 import org.example.sportsfight.kafka.messages.EmailNotification;
 import org.slf4j.Logger;
@@ -22,12 +23,13 @@ public class KafkaNotificationProducer {
     }
 
     public void sendEmailNotification(EmailNotification email) {
-        logger.info("Sending message - {} to - {}", email, topicProps.getNotificationEmailTopic());
+        logger.info("Sending message - {} to - {}", email.getEmail() + " " + email.getText(), topicProps.getNotificationEmailTopic());
         try {
-            kafkaEmailTemplate.send(topicProps.getNotificationEmailTopic(), email.getId().toString(), new ObjectMapper().writeValueAsString(email))
+            kafkaEmailTemplate.send(topicProps.getNotificationEmailTopic(), email.getId().toString(), new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(email))
                     .whenComplete(this::addCallBack);
         } catch (JsonProcessingException e) {
             logger.error("Error sending message - {} to - {}", email, topicProps.getNotificationEmailTopic());
+            logger.error(e.getMessage(), e);
         }
     }
 

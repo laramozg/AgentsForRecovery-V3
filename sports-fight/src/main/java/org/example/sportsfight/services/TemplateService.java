@@ -3,6 +3,7 @@ package org.example.sportsfight.services;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.sportsfight.kafka.messages.EmailNotification;
 import org.example.sportsfight.models.Performer;
 import org.example.sportsfight.services.clients.dto.OrderDeadlineDto;
@@ -20,7 +21,6 @@ public class TemplateService {
                 performer.getUsername(),
                 ChronoUnit.DAYS.between(LocalDate.now(), deadlineDto.deadline())
         );
-
         return new EmailNotification(
                 performer.getEmail(),
                 "Напоминание о задании",

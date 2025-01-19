@@ -111,7 +111,7 @@ services:
 
       SPORTS_USER_NAME: sports-user
       SPORTS_ORDER_NAME: sports_order
-      SPORTS_FIGHT_NAME: sports_fight
+      SPORTS_FIGHT_NAME: sports-fight
 
       # sports-user
       SPORTS_USER_R2DBC_URL: r2dbc:postgresql://sports-postgres:5432/sports_user
@@ -258,5 +258,28 @@ services:
       - sports-discovery
       - sports-config
       - sports-gateway
+    profiles:
+      - cloud
+
+  sports-notification:
+    container_name: sports-notification
+    image: sports-notification
+    ports:
+      - "8491:8491"
+    build:
+      context: "sports-notification"
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: cloud
+      DISCOVERY_SERVER_URL: http://eureka_client:eureka_password@sports-discovery:8761/eureka
+      PORT: 8491
+    depends_on:
+      - sports-minio
+      - sports-discovery
+      - sports-config
+      - sports-gateway
+      - sports-kafka-broker-1
+      - sports-kafka-broker-2
+      - sports-kafka-broker-3
     profiles:
       - cloud

@@ -39,7 +39,7 @@ eureka:
 api:
   job:
     scheduler:
-      process-debt: "0 0 0 * * *"
+      process-debt: "0 */5 * * * *"
 
 management:
   endpoints:

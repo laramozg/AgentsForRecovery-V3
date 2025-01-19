@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -35,8 +34,8 @@ public class SecurityConfiguration {
                         .pathMatchers(
                                 "/actuator/**",
                                 "/webjars/**",
-                                "sports-fight/v3/api-docs/**")
-                        .permitAll()
+                                "sports-fight/v3/api-docs/**"
+                        ).permitAll()
                         .pathMatchers("/**").authenticated())
                 .addFilterBefore(authenticationFilter, SecurityWebFiltersOrder.AUTHORIZATION)
                 .exceptionHandling(exceptionHandling -> {

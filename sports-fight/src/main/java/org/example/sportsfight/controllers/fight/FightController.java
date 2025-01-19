@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sportsfight.controllers.fight.dto.FightDto;
@@ -25,6 +26,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
+@Tag(name = "Fight controller", description = "Контроллер для боев")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/fights")
